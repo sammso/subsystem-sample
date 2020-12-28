@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.dnebinger.subsystem.events.model.Event;
 import com.dnebinger.subsystem.events.model.EventAttendee;
 import com.dnebinger.subsystem.events.model.RelatedEvent;
@@ -32,6 +30,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
 
 import java.util.List;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 /**
  * Provides the remote service interface for Event. Methods of this
  * service are expected to have security checks based on the propagated JAAS
@@ -39,32 +39,31 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @see EventServiceUtil
- * @see com.dnebinger.subsystem.events.service.base.EventServiceBaseImpl
- * @see com.dnebinger.subsystem.events.service.impl.EventServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=subsys", "json.web.service.context.path=Event"}, service = EventService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=subsys",
+		"json.web.service.context.path=Event"
+	},
+	service = EventService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface EventService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link EventServiceUtil} to access the event remote service. Add custom service methods to {@link com.dnebinger.subsystem.events.service.impl.EventServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add custom service methods to <code>com.dnebinger.subsystem.events.service.impl.EventServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the event remote service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link EventServiceUtil} if injection and service tracking are not available.
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Event getEvent(long eventId);
-
-	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
-	public java.lang.String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<EventAttendee> getEventAttendees(long eventId);
@@ -72,6 +71,14 @@ public interface EventService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Event> getEvents();
 
+	/**
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
+	public String getOSGiServiceIdentifier();
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<RelatedEvent> getRelatedEvents(long eventId);
+
 }

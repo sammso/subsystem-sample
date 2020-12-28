@@ -14,18 +14,11 @@
 
 package com.dnebinger.subsystem.events.model;
 
-import aQute.bnd.annotation.ProviderType;
-
-import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
-import com.liferay.portal.kernel.service.ServiceContext;
-
-import java.io.Serializable;
+import com.liferay.portal.kernel.model.wrapper.BaseModelWrapper;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * <p>
@@ -36,21 +29,12 @@ import java.util.Objects;
  * @see EventAttendee
  * @generated
  */
-@ProviderType
-public class EventAttendeeWrapper implements EventAttendee,
-	ModelWrapper<EventAttendee> {
+public class EventAttendeeWrapper
+	extends BaseModelWrapper<EventAttendee>
+	implements EventAttendee, ModelWrapper<EventAttendee> {
+
 	public EventAttendeeWrapper(EventAttendee eventAttendee) {
-		_eventAttendee = eventAttendee;
-	}
-
-	@Override
-	public Class<?> getModelClass() {
-		return EventAttendee.class;
-	}
-
-	@Override
-	public String getModelClassName() {
-		return EventAttendee.class.getName();
+		super(eventAttendee);
 	}
 
 	@Override
@@ -85,265 +69,134 @@ public class EventAttendeeWrapper implements EventAttendee,
 		}
 	}
 
-	@Override
-	public EventAttendee toEscapedModel() {
-		return new EventAttendeeWrapper(_eventAttendee.toEscapedModel());
-	}
-
-	@Override
-	public EventAttendee toUnescapedModel() {
-		return new EventAttendeeWrapper(_eventAttendee.toUnescapedModel());
-	}
-
-	@Override
-	public boolean isCachedModel() {
-		return _eventAttendee.isCachedModel();
-	}
-
-	@Override
-	public boolean isEscapedModel() {
-		return _eventAttendee.isEscapedModel();
-	}
-
-	@Override
-	public boolean isNew() {
-		return _eventAttendee.isNew();
-	}
-
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _eventAttendee.getExpandoBridge();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<EventAttendee> toCacheModel() {
-		return _eventAttendee.toCacheModel();
-	}
-
-	@Override
-	public int compareTo(EventAttendee eventAttendee) {
-		return _eventAttendee.compareTo(eventAttendee);
-	}
-
-	@Override
-	public int hashCode() {
-		return _eventAttendee.hashCode();
-	}
-
-	@Override
-	public Serializable getPrimaryKeyObj() {
-		return _eventAttendee.getPrimaryKeyObj();
-	}
-
-	@Override
-	public java.lang.Object clone() {
-		return new EventAttendeeWrapper((EventAttendee)_eventAttendee.clone());
-	}
-
 	/**
-	* getEventName: Returns the name of the event.
-	*
-	* @return String The name of the event.
-	*/
-	@Override
-	public java.lang.String getEventName() {
-		return _eventAttendee.getEventName();
-	}
-
-	/**
-	* getUserName; Returns the name of the event attendee.
-	*
-	* @return String The attendee name.
-	*/
-	@Override
-	public java.lang.String getUserName() {
-		return _eventAttendee.getUserName();
-	}
-
-	/**
-	* Returns the user uuid of this event attendee.
-	*
-	* @return the user uuid of this event attendee
-	*/
-	@Override
-	public java.lang.String getUserUuid() {
-		return _eventAttendee.getUserUuid();
-	}
-
-	@Override
-	public java.lang.String toString() {
-		return _eventAttendee.toString();
-	}
-
-	@Override
-	public java.lang.String toXmlString() {
-		return _eventAttendee.toXmlString();
-	}
-
-	/**
-	* Returns the event ID of this event attendee.
-	*
-	* @return the event ID of this event attendee
-	*/
+	 * Returns the event ID of this event attendee.
+	 *
+	 * @return the event ID of this event attendee
+	 */
 	@Override
 	public long getEventId() {
-		return _eventAttendee.getEventId();
+		return model.getEventId();
 	}
 
 	/**
-	* Returns the primary key of this event attendee.
-	*
-	* @return the primary key of this event attendee
-	*/
+	 * getEventName: Returns the name of the event.
+	 *
+	 * @return String The name of the event.
+	 */
+	@Override
+	public String getEventName() {
+		return model.getEventName();
+	}
+
+	/**
+	 * Returns the primary key of this event attendee.
+	 *
+	 * @return the primary key of this event attendee
+	 */
 	@Override
 	public long getPrimaryKey() {
-		return _eventAttendee.getPrimaryKey();
+		return model.getPrimaryKey();
 	}
 
 	/**
-	* Returns the surrogate ID of this event attendee.
-	*
-	* @return the surrogate ID of this event attendee
-	*/
+	 * Returns the surrogate ID of this event attendee.
+	 *
+	 * @return the surrogate ID of this event attendee
+	 */
 	@Override
 	public long getSurrogateId() {
-		return _eventAttendee.getSurrogateId();
+		return model.getSurrogateId();
 	}
 
 	/**
-	* Returns the user ID of this event attendee.
-	*
-	* @return the user ID of this event attendee
-	*/
+	 * Returns the user ID of this event attendee.
+	 *
+	 * @return the user ID of this event attendee
+	 */
 	@Override
 	public long getUserId() {
-		return _eventAttendee.getUserId();
+		return model.getUserId();
+	}
+
+	/**
+	 * getUserName; Returns the name of the event attendee.
+	 *
+	 * @return String The attendee name.
+	 */
+	@Override
+	public String getUserName() {
+		return model.getUserName();
+	}
+
+	/**
+	 * Returns the user uuid of this event attendee.
+	 *
+	 * @return the user uuid of this event attendee
+	 */
+	@Override
+	public String getUserUuid() {
+		return model.getUserUuid();
 	}
 
 	@Override
 	public void persist() {
-		_eventAttendee.persist();
-	}
-
-	@Override
-	public void setCachedModel(boolean cachedModel) {
-		_eventAttendee.setCachedModel(cachedModel);
+		model.persist();
 	}
 
 	/**
-	* Sets the event ID of this event attendee.
-	*
-	* @param eventId the event ID of this event attendee
-	*/
+	 * Sets the event ID of this event attendee.
+	 *
+	 * @param eventId the event ID of this event attendee
+	 */
 	@Override
 	public void setEventId(long eventId) {
-		_eventAttendee.setEventId(eventId);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_eventAttendee.setExpandoBridgeAttributes(expandoBridge);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
-		_eventAttendee.setExpandoBridgeAttributes(baseModel);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_eventAttendee.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	@Override
-	public void setNew(boolean n) {
-		_eventAttendee.setNew(n);
+		model.setEventId(eventId);
 	}
 
 	/**
-	* Sets the primary key of this event attendee.
-	*
-	* @param primaryKey the primary key of this event attendee
-	*/
+	 * Sets the primary key of this event attendee.
+	 *
+	 * @param primaryKey the primary key of this event attendee
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		_eventAttendee.setPrimaryKey(primaryKey);
-	}
-
-	@Override
-	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		_eventAttendee.setPrimaryKeyObj(primaryKeyObj);
+		model.setPrimaryKey(primaryKey);
 	}
 
 	/**
-	* Sets the surrogate ID of this event attendee.
-	*
-	* @param surrogateId the surrogate ID of this event attendee
-	*/
+	 * Sets the surrogate ID of this event attendee.
+	 *
+	 * @param surrogateId the surrogate ID of this event attendee
+	 */
 	@Override
 	public void setSurrogateId(long surrogateId) {
-		_eventAttendee.setSurrogateId(surrogateId);
+		model.setSurrogateId(surrogateId);
 	}
 
 	/**
-	* Sets the user ID of this event attendee.
-	*
-	* @param userId the user ID of this event attendee
-	*/
+	 * Sets the user ID of this event attendee.
+	 *
+	 * @param userId the user ID of this event attendee
+	 */
 	@Override
 	public void setUserId(long userId) {
-		_eventAttendee.setUserId(userId);
+		model.setUserId(userId);
 	}
 
 	/**
-	* Sets the user uuid of this event attendee.
-	*
-	* @param userUuid the user uuid of this event attendee
-	*/
+	 * Sets the user uuid of this event attendee.
+	 *
+	 * @param userUuid the user uuid of this event attendee
+	 */
 	@Override
-	public void setUserUuid(java.lang.String userUuid) {
-		_eventAttendee.setUserUuid(userUuid);
+	public void setUserUuid(String userUuid) {
+		model.setUserUuid(userUuid);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-
-		if (!(obj instanceof EventAttendeeWrapper)) {
-			return false;
-		}
-
-		EventAttendeeWrapper eventAttendeeWrapper = (EventAttendeeWrapper)obj;
-
-		if (Objects.equals(_eventAttendee, eventAttendeeWrapper._eventAttendee)) {
-			return true;
-		}
-
-		return false;
+	protected EventAttendeeWrapper wrap(EventAttendee eventAttendee) {
+		return new EventAttendeeWrapper(eventAttendee);
 	}
 
-	@Override
-	public EventAttendee getWrappedModel() {
-		return _eventAttendee;
-	}
-
-	@Override
-	public boolean isEntityCacheEnabled() {
-		return _eventAttendee.isEntityCacheEnabled();
-	}
-
-	@Override
-	public boolean isFinderCacheEnabled() {
-		return _eventAttendee.isFinderCacheEnabled();
-	}
-
-	@Override
-	public void resetOriginalValues() {
-		_eventAttendee.resetOriginalValues();
-	}
-
-	private final EventAttendee _eventAttendee;
 }

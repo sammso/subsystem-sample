@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.dnebinger.subsystem.events.service.EventServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
@@ -27,10 +25,11 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 /**
  * Provides the HTTP utility for the
- * {@link EventServiceUtil} service utility. The
+ * <code>EventServiceUtil</code> service
+ * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * {@link HttpPrincipal} parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -49,17 +48,16 @@ import com.liferay.portal.kernel.util.MethodKey;
  *
  * @author Brian Wing Shun Chan
  * @see EventServiceSoap
- * @see HttpPrincipal
- * @see EventServiceUtil
  * @generated
  */
-@ProviderType
 public class EventServiceHttp {
+
 	public static com.dnebinger.subsystem.events.model.Event getEvent(
 		HttpPrincipal httpPrincipal, long eventId) {
+
 		try {
-			MethodKey methodKey = new MethodKey(EventServiceUtil.class,
-					"getEvent", _getEventParameterTypes0);
+			MethodKey methodKey = new MethodKey(
+				EventServiceUtil.class, "getEvent", _getEventParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, eventId);
 
@@ -68,24 +66,28 @@ public class EventServiceHttp {
 			try {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
-			catch (Exception e) {
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
 			}
 
 			return (com.dnebinger.subsystem.events.model.Event)returnObj;
 		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
 
-			throw se;
+			_log.error(systemException, systemException);
+
+			throw systemException;
 		}
 	}
 
-	public static java.util.List<com.dnebinger.subsystem.events.model.Event> getEvents(
-		HttpPrincipal httpPrincipal) {
+	public static java.util.List<com.dnebinger.subsystem.events.model.Event>
+		getEvents(HttpPrincipal httpPrincipal) {
+
 		try {
-			MethodKey methodKey = new MethodKey(EventServiceUtil.class,
-					"getEvents", _getEventsParameterTypes1);
+			MethodKey methodKey = new MethodKey(
+				EventServiceUtil.class, "getEvents", _getEventsParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
@@ -94,24 +96,31 @@ public class EventServiceHttp {
 			try {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
-			catch (Exception e) {
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
 			}
 
-			return (java.util.List<com.dnebinger.subsystem.events.model.Event>)returnObj;
+			return (java.util.List<com.dnebinger.subsystem.events.model.Event>)
+				returnObj;
 		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
 
-			throw se;
+			_log.error(systemException, systemException);
+
+			throw systemException;
 		}
 	}
 
-	public static java.util.List<com.dnebinger.subsystem.events.model.RelatedEvent> getRelatedEvents(
-		HttpPrincipal httpPrincipal, long eventId) {
+	public static java.util.List
+		<com.dnebinger.subsystem.events.model.RelatedEvent> getRelatedEvents(
+			HttpPrincipal httpPrincipal, long eventId) {
+
 		try {
-			MethodKey methodKey = new MethodKey(EventServiceUtil.class,
-					"getRelatedEvents", _getRelatedEventsParameterTypes2);
+			MethodKey methodKey = new MethodKey(
+				EventServiceUtil.class, "getRelatedEvents",
+				_getRelatedEventsParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, eventId);
 
@@ -120,24 +129,31 @@ public class EventServiceHttp {
 			try {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
-			catch (Exception e) {
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
 			}
 
-			return (java.util.List<com.dnebinger.subsystem.events.model.RelatedEvent>)returnObj;
+			return (java.util.List
+				<com.dnebinger.subsystem.events.model.RelatedEvent>)returnObj;
 		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
 
-			throw se;
+			_log.error(systemException, systemException);
+
+			throw systemException;
 		}
 	}
 
-	public static java.util.List<com.dnebinger.subsystem.events.model.EventAttendee> getEventAttendees(
-		HttpPrincipal httpPrincipal, long eventId) {
+	public static java.util.List
+		<com.dnebinger.subsystem.events.model.EventAttendee> getEventAttendees(
+			HttpPrincipal httpPrincipal, long eventId) {
+
 		try {
-			MethodKey methodKey = new MethodKey(EventServiceUtil.class,
-					"getEventAttendees", _getEventAttendeesParameterTypes3);
+			MethodKey methodKey = new MethodKey(
+				EventServiceUtil.class, "getEventAttendees",
+				_getEventAttendeesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, eventId);
 
@@ -146,28 +162,32 @@ public class EventServiceHttp {
 			try {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
-			catch (Exception e) {
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
 			}
 
-			return (java.util.List<com.dnebinger.subsystem.events.model.EventAttendee>)returnObj;
+			return (java.util.List
+				<com.dnebinger.subsystem.events.model.EventAttendee>)returnObj;
 		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
 
-			throw se;
+			_log.error(systemException, systemException);
+
+			throw systemException;
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(EventServiceHttp.class);
+
 	private static final Class<?>[] _getEventParameterTypes0 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getEventsParameterTypes1 = new Class[] {  };
-	private static final Class<?>[] _getRelatedEventsParameterTypes2 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getEventAttendeesParameterTypes3 = new Class[] {
-			long.class
-		};
+		long.class
+	};
+	private static final Class<?>[] _getEventsParameterTypes1 = new Class[] {};
+	private static final Class<?>[] _getRelatedEventsParameterTypes2 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getEventAttendeesParameterTypes3 =
+		new Class[] {long.class};
+
 }

@@ -14,30 +14,31 @@
 
 package com.dnebinger.subsystem.events.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.annotation.ImplementationClassName;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.util.Accessor;
+
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * The extended model interface for the Event service. Represents a row in the &quot;SUBSYS_Event&quot; database table, with each column mapped to a property of this class.
  *
  * @author Brian Wing Shun Chan
  * @see EventModel
- * @see com.dnebinger.subsystem.events.model.impl.EventImpl
- * @see com.dnebinger.subsystem.events.model.impl.EventModelImpl
  * @generated
  */
 @ImplementationClassName("com.dnebinger.subsystem.events.model.impl.EventImpl")
 @ProviderType
 public interface Event extends EventModel, PersistedModel {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.dnebinger.subsystem.events.model.impl.EventImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.dnebinger.subsystem.events.model.impl.EventImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<Event, Long> EVENT_ID_ACCESSOR = new Accessor<Event, Long>() {
+	public static final Accessor<Event, Long> EVENT_ID_ACCESSOR =
+		new Accessor<Event, Long>() {
+
 			@Override
 			public Long get(Event event) {
 				return event.getEventId();
@@ -52,46 +53,48 @@ public interface Event extends EventModel, PersistedModel {
 			public Class<Event> getTypeClass() {
 				return Event.class;
 			}
+
 		};
 
 	/**
-	* getId: Return an integer of the id since the json conversion of our long id is returned as a string.
-	*
-	* @return int The integer version of the event id.
-	*/
-	@com.liferay.portal.kernel.json.JSON()
+	 * getId: Return an integer of the id since the json conversion of our long id is returned as a string.
+	 *
+	 * @return int The integer version of the event id.
+	 */
+	@com.liferay.portal.kernel.json.JSON
 	public int getId();
 
 	/**
-	* getSelected: Doesn't really do much but it will inject a default boolean of false into
-	* the json representation of our object.
-	*
-	* @return boolean Always returns <code>false</code>.
-	*/
-	@com.liferay.portal.kernel.json.JSON()
+	 * getSelected: Doesn't really do much but it will inject a default boolean of false into
+	 * the json representation of our object.
+	 *
+	 * @return boolean Always returns <code>false</code>.
+	 */
+	@com.liferay.portal.kernel.json.JSON
 	public boolean getSelected();
 
 	/**
-	* getDateDisplay: Returns the display date string for the event.
-	*
-	* @return String The display date string.
-	*/
-	@com.liferay.portal.kernel.json.JSON()
-	public java.lang.String getDateDisplay();
+	 * getDateDisplay: Returns the display date string for the event.
+	 *
+	 * @return String The display date string.
+	 */
+	@com.liferay.portal.kernel.json.JSON
+	public String getDateDisplay();
 
 	/**
-	* getLocation: Returns the location as a simple string.
-	*
-	* @return String The location string.
-	*/
-	@com.liferay.portal.kernel.json.JSON()
-	public java.lang.String getLocation();
+	 * getLocation: Returns the location as a simple string.
+	 *
+	 * @return String The location string.
+	 */
+	@com.liferay.portal.kernel.json.JSON
+	public String getLocation();
 
 	/**
-	* getOrganizerName: Return the event organizer name.
-	*
-	* @return String The organizer name.
-	*/
-	@com.liferay.portal.kernel.json.JSON()
-	public java.lang.String getOrganizerName();
+	 * getOrganizerName: Return the event organizer name.
+	 *
+	 * @return String The organizer name.
+	 */
+	@com.liferay.portal.kernel.json.JSON
+	public String getOrganizerName();
+
 }

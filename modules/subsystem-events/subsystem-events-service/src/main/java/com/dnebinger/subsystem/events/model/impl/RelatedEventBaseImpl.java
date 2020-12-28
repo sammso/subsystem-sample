@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.dnebinger.subsystem.events.model.RelatedEvent;
 import com.dnebinger.subsystem.events.service.RelatedEventLocalServiceUtil;
 
@@ -31,13 +29,13 @@ import com.dnebinger.subsystem.events.service.RelatedEventLocalServiceUtil;
  * @see RelatedEvent
  * @generated
  */
-@ProviderType
-public abstract class RelatedEventBaseImpl extends RelatedEventModelImpl
-	implements RelatedEvent {
+public abstract class RelatedEventBaseImpl
+	extends RelatedEventModelImpl implements RelatedEvent {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a related event model instance should use the {@link RelatedEvent} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a related event model instance should use the <code>RelatedEvent</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +46,5 @@ public abstract class RelatedEventBaseImpl extends RelatedEventModelImpl
 			RelatedEventLocalServiceUtil.updateRelatedEvent(this);
 		}
 	}
+
 }

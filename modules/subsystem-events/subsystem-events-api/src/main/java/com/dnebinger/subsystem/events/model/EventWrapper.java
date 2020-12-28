@@ -14,19 +14,12 @@
 
 package com.dnebinger.subsystem.events.model;
 
-import aQute.bnd.annotation.ProviderType;
-
-import com.liferay.expando.kernel.model.ExpandoBridge;
-
 import com.liferay.portal.kernel.model.ModelWrapper;
-import com.liferay.portal.kernel.service.ServiceContext;
-
-import java.io.Serializable;
+import com.liferay.portal.kernel.model.wrapper.BaseModelWrapper;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * <p>
@@ -37,20 +30,11 @@ import java.util.Objects;
  * @see Event
  * @generated
  */
-@ProviderType
-public class EventWrapper implements Event, ModelWrapper<Event> {
+public class EventWrapper
+	extends BaseModelWrapper<Event> implements Event, ModelWrapper<Event> {
+
 	public EventWrapper(Event event) {
-		_event = event;
-	}
-
-	@Override
-	public Class<?> getModelClass() {
-		return Event.class;
-	}
-
-	@Override
-	public String getModelClassName() {
-		return Event.class.getName();
+		super(event);
 	}
 
 	@Override
@@ -62,7 +46,7 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 		attributes.put("name", getName());
 		attributes.put("occursOn", getOccursOn());
 		attributes.put("endsOn", getEndsOn());
-		attributes.put("adultOnly", getAdultOnly());
+		attributes.put("adultOnly", isAdultOnly());
 		attributes.put("maxOccupants", getMaxOccupants());
 		attributes.put("description", getDescription());
 		attributes.put("floor", getFloor());
@@ -141,446 +125,315 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 		}
 	}
 
-	@Override
-	public Event toEscapedModel() {
-		return new EventWrapper(_event.toEscapedModel());
-	}
-
-	@Override
-	public Event toUnescapedModel() {
-		return new EventWrapper(_event.toUnescapedModel());
-	}
-
 	/**
-	* Returns the adult only of this event.
-	*
-	* @return the adult only of this event
-	*/
+	 * Returns the adult only of this event.
+	 *
+	 * @return the adult only of this event
+	 */
 	@Override
 	public boolean getAdultOnly() {
-		return _event.getAdultOnly();
+		return model.getAdultOnly();
 	}
 
 	/**
-	* getSelected: Doesn't really do much but it will inject a default boolean of false into
-	* the json representation of our object.
-	*
-	* @return boolean Always returns <code>false</code>.
-	*/
+	 * getDateDisplay: Returns the display date string for the event.
+	 *
+	 * @return String The display date string.
+	 */
 	@Override
-	public boolean getSelected() {
-		return _event.getSelected();
+	public String getDateDisplay() {
+		return model.getDateDisplay();
 	}
 
 	/**
-	* Returns <code>true</code> if this event is adult only.
-	*
-	* @return <code>true</code> if this event is adult only; <code>false</code> otherwise
-	*/
+	 * Returns the description of this event.
+	 *
+	 * @return the description of this event
+	 */
 	@Override
-	public boolean isAdultOnly() {
-		return _event.isAdultOnly();
-	}
-
-	@Override
-	public boolean isCachedModel() {
-		return _event.isCachedModel();
-	}
-
-	@Override
-	public boolean isEscapedModel() {
-		return _event.isEscapedModel();
-	}
-
-	@Override
-	public boolean isNew() {
-		return _event.isNew();
-	}
-
-	@Override
-	public ExpandoBridge getExpandoBridge() {
-		return _event.getExpandoBridge();
-	}
-
-	@Override
-	public com.liferay.portal.kernel.model.CacheModel<Event> toCacheModel() {
-		return _event.toCacheModel();
-	}
-
-	@Override
-	public int compareTo(Event event) {
-		return _event.compareTo(event);
+	public String getDescription() {
+		return model.getDescription();
 	}
 
 	/**
-	* Returns the floor of this event.
-	*
-	* @return the floor of this event
-	*/
-	@Override
-	public int getFloor() {
-		return _event.getFloor();
-	}
-
-	/**
-	* getId: Return an integer of the id since the json conversion of our long id is returned as a string.
-	*
-	* @return int The integer version of the event id.
-	*/
-	@Override
-	public int getId() {
-		return _event.getId();
-	}
-
-	/**
-	* Returns the max occupants of this event.
-	*
-	* @return the max occupants of this event
-	*/
-	@Override
-	public int getMaxOccupants() {
-		return _event.getMaxOccupants();
-	}
-
-	@Override
-	public int hashCode() {
-		return _event.hashCode();
-	}
-
-	@Override
-	public Serializable getPrimaryKeyObj() {
-		return _event.getPrimaryKeyObj();
-	}
-
-	@Override
-	public java.lang.Object clone() {
-		return new EventWrapper((Event)_event.clone());
-	}
-
-	/**
-	* getDateDisplay: Returns the display date string for the event.
-	*
-	* @return String The display date string.
-	*/
-	@Override
-	public java.lang.String getDateDisplay() {
-		return _event.getDateDisplay();
-	}
-
-	/**
-	* Returns the description of this event.
-	*
-	* @return the description of this event
-	*/
-	@Override
-	public java.lang.String getDescription() {
-		return _event.getDescription();
-	}
-
-	/**
-	* getLocation: Returns the location as a simple string.
-	*
-	* @return String The location string.
-	*/
-	@Override
-	public java.lang.String getLocation() {
-		return _event.getLocation();
-	}
-
-	/**
-	* Returns the name of this event.
-	*
-	* @return the name of this event
-	*/
-	@Override
-	public java.lang.String getName() {
-		return _event.getName();
-	}
-
-	/**
-	* getOrganizerName: Return the event organizer name.
-	*
-	* @return String The organizer name.
-	*/
-	@Override
-	public java.lang.String getOrganizerName() {
-		return _event.getOrganizerName();
-	}
-
-	/**
-	* Returns the room of this event.
-	*
-	* @return the room of this event
-	*/
-	@Override
-	public java.lang.String getRoom() {
-		return _event.getRoom();
-	}
-
-	/**
-	* Returns the uuid of this event.
-	*
-	* @return the uuid of this event
-	*/
-	@Override
-	public java.lang.String getUuid() {
-		return _event.getUuid();
-	}
-
-	@Override
-	public java.lang.String toString() {
-		return _event.toString();
-	}
-
-	@Override
-	public java.lang.String toXmlString() {
-		return _event.toXmlString();
-	}
-
-	/**
-	* Returns the ends on of this event.
-	*
-	* @return the ends on of this event
-	*/
+	 * Returns the ends on of this event.
+	 *
+	 * @return the ends on of this event
+	 */
 	@Override
 	public Date getEndsOn() {
-		return _event.getEndsOn();
+		return model.getEndsOn();
 	}
 
 	/**
-	* Returns the occurs on of this event.
-	*
-	* @return the occurs on of this event
-	*/
-	@Override
-	public Date getOccursOn() {
-		return _event.getOccursOn();
-	}
-
-	/**
-	* Returns the event ID of this event.
-	*
-	* @return the event ID of this event
-	*/
+	 * Returns the event ID of this event.
+	 *
+	 * @return the event ID of this event
+	 */
 	@Override
 	public long getEventId() {
-		return _event.getEventId();
+		return model.getEventId();
 	}
 
 	/**
-	* Returns the organizer of this event.
-	*
-	* @return the organizer of this event
-	*/
+	 * Returns the floor of this event.
+	 *
+	 * @return the floor of this event
+	 */
+	@Override
+	public int getFloor() {
+		return model.getFloor();
+	}
+
+	/**
+	 * getId: Return an integer of the id since the json conversion of our long id is returned as a string.
+	 *
+	 * @return int The integer version of the event id.
+	 */
+	@Override
+	public int getId() {
+		return model.getId();
+	}
+
+	/**
+	 * getLocation: Returns the location as a simple string.
+	 *
+	 * @return String The location string.
+	 */
+	@Override
+	public String getLocation() {
+		return model.getLocation();
+	}
+
+	/**
+	 * Returns the max occupants of this event.
+	 *
+	 * @return the max occupants of this event
+	 */
+	@Override
+	public int getMaxOccupants() {
+		return model.getMaxOccupants();
+	}
+
+	/**
+	 * Returns the name of this event.
+	 *
+	 * @return the name of this event
+	 */
+	@Override
+	public String getName() {
+		return model.getName();
+	}
+
+	/**
+	 * Returns the occurs on of this event.
+	 *
+	 * @return the occurs on of this event
+	 */
+	@Override
+	public Date getOccursOn() {
+		return model.getOccursOn();
+	}
+
+	/**
+	 * Returns the organizer of this event.
+	 *
+	 * @return the organizer of this event
+	 */
 	@Override
 	public long getOrganizer() {
-		return _event.getOrganizer();
+		return model.getOrganizer();
 	}
 
 	/**
-	* Returns the primary key of this event.
-	*
-	* @return the primary key of this event
-	*/
+	 * getOrganizerName: Return the event organizer name.
+	 *
+	 * @return String The organizer name.
+	 */
+	@Override
+	public String getOrganizerName() {
+		return model.getOrganizerName();
+	}
+
+	/**
+	 * Returns the primary key of this event.
+	 *
+	 * @return the primary key of this event
+	 */
 	@Override
 	public long getPrimaryKey() {
-		return _event.getPrimaryKey();
+		return model.getPrimaryKey();
+	}
+
+	/**
+	 * Returns the room of this event.
+	 *
+	 * @return the room of this event
+	 */
+	@Override
+	public String getRoom() {
+		return model.getRoom();
+	}
+
+	/**
+	 * getSelected: Doesn't really do much but it will inject a default boolean of false into
+	 * the json representation of our object.
+	 *
+	 * @return boolean Always returns <code>false</code>.
+	 */
+	@Override
+	public boolean getSelected() {
+		return model.getSelected();
+	}
+
+	/**
+	 * Returns the uuid of this event.
+	 *
+	 * @return the uuid of this event
+	 */
+	@Override
+	public String getUuid() {
+		return model.getUuid();
+	}
+
+	/**
+	 * Returns <code>true</code> if this event is adult only.
+	 *
+	 * @return <code>true</code> if this event is adult only; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isAdultOnly() {
+		return model.isAdultOnly();
 	}
 
 	@Override
 	public void persist() {
-		_event.persist();
+		model.persist();
 	}
 
 	/**
-	* Sets whether this event is adult only.
-	*
-	* @param adultOnly the adult only of this event
-	*/
+	 * Sets whether this event is adult only.
+	 *
+	 * @param adultOnly the adult only of this event
+	 */
 	@Override
 	public void setAdultOnly(boolean adultOnly) {
-		_event.setAdultOnly(adultOnly);
-	}
-
-	@Override
-	public void setCachedModel(boolean cachedModel) {
-		_event.setCachedModel(cachedModel);
+		model.setAdultOnly(adultOnly);
 	}
 
 	/**
-	* Sets the description of this event.
-	*
-	* @param description the description of this event
-	*/
+	 * Sets the description of this event.
+	 *
+	 * @param description the description of this event
+	 */
 	@Override
-	public void setDescription(java.lang.String description) {
-		_event.setDescription(description);
+	public void setDescription(String description) {
+		model.setDescription(description);
 	}
 
 	/**
-	* Sets the ends on of this event.
-	*
-	* @param endsOn the ends on of this event
-	*/
+	 * Sets the ends on of this event.
+	 *
+	 * @param endsOn the ends on of this event
+	 */
 	@Override
 	public void setEndsOn(Date endsOn) {
-		_event.setEndsOn(endsOn);
+		model.setEndsOn(endsOn);
 	}
 
 	/**
-	* Sets the event ID of this event.
-	*
-	* @param eventId the event ID of this event
-	*/
+	 * Sets the event ID of this event.
+	 *
+	 * @param eventId the event ID of this event
+	 */
 	@Override
 	public void setEventId(long eventId) {
-		_event.setEventId(eventId);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_event.setExpandoBridgeAttributes(expandoBridge);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(
-		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
-		_event.setExpandoBridgeAttributes(baseModel);
-	}
-
-	@Override
-	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_event.setExpandoBridgeAttributes(serviceContext);
+		model.setEventId(eventId);
 	}
 
 	/**
-	* Sets the floor of this event.
-	*
-	* @param floor the floor of this event
-	*/
+	 * Sets the floor of this event.
+	 *
+	 * @param floor the floor of this event
+	 */
 	@Override
 	public void setFloor(int floor) {
-		_event.setFloor(floor);
+		model.setFloor(floor);
 	}
 
 	/**
-	* Sets the max occupants of this event.
-	*
-	* @param maxOccupants the max occupants of this event
-	*/
+	 * Sets the max occupants of this event.
+	 *
+	 * @param maxOccupants the max occupants of this event
+	 */
 	@Override
 	public void setMaxOccupants(int maxOccupants) {
-		_event.setMaxOccupants(maxOccupants);
+		model.setMaxOccupants(maxOccupants);
 	}
 
 	/**
-	* Sets the name of this event.
-	*
-	* @param name the name of this event
-	*/
+	 * Sets the name of this event.
+	 *
+	 * @param name the name of this event
+	 */
 	@Override
-	public void setName(java.lang.String name) {
-		_event.setName(name);
-	}
-
-	@Override
-	public void setNew(boolean n) {
-		_event.setNew(n);
+	public void setName(String name) {
+		model.setName(name);
 	}
 
 	/**
-	* Sets the occurs on of this event.
-	*
-	* @param occursOn the occurs on of this event
-	*/
+	 * Sets the occurs on of this event.
+	 *
+	 * @param occursOn the occurs on of this event
+	 */
 	@Override
 	public void setOccursOn(Date occursOn) {
-		_event.setOccursOn(occursOn);
+		model.setOccursOn(occursOn);
 	}
 
 	/**
-	* Sets the organizer of this event.
-	*
-	* @param organizer the organizer of this event
-	*/
+	 * Sets the organizer of this event.
+	 *
+	 * @param organizer the organizer of this event
+	 */
 	@Override
 	public void setOrganizer(long organizer) {
-		_event.setOrganizer(organizer);
+		model.setOrganizer(organizer);
 	}
 
 	/**
-	* Sets the primary key of this event.
-	*
-	* @param primaryKey the primary key of this event
-	*/
+	 * Sets the primary key of this event.
+	 *
+	 * @param primaryKey the primary key of this event
+	 */
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		_event.setPrimaryKey(primaryKey);
-	}
-
-	@Override
-	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		_event.setPrimaryKeyObj(primaryKeyObj);
+		model.setPrimaryKey(primaryKey);
 	}
 
 	/**
-	* Sets the room of this event.
-	*
-	* @param room the room of this event
-	*/
+	 * Sets the room of this event.
+	 *
+	 * @param room the room of this event
+	 */
 	@Override
-	public void setRoom(java.lang.String room) {
-		_event.setRoom(room);
+	public void setRoom(String room) {
+		model.setRoom(room);
 	}
 
 	/**
-	* Sets the uuid of this event.
-	*
-	* @param uuid the uuid of this event
-	*/
+	 * Sets the uuid of this event.
+	 *
+	 * @param uuid the uuid of this event
+	 */
 	@Override
-	public void setUuid(java.lang.String uuid) {
-		_event.setUuid(uuid);
+	public void setUuid(String uuid) {
+		model.setUuid(uuid);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-
-		if (!(obj instanceof EventWrapper)) {
-			return false;
-		}
-
-		EventWrapper eventWrapper = (EventWrapper)obj;
-
-		if (Objects.equals(_event, eventWrapper._event)) {
-			return true;
-		}
-
-		return false;
+	protected EventWrapper wrap(Event event) {
+		return new EventWrapper(event);
 	}
 
-	@Override
-	public Event getWrappedModel() {
-		return _event;
-	}
-
-	@Override
-	public boolean isEntityCacheEnabled() {
-		return _event.isEntityCacheEnabled();
-	}
-
-	@Override
-	public boolean isFinderCacheEnabled() {
-		return _event.isFinderCacheEnabled();
-	}
-
-	@Override
-	public void resetOriginalValues() {
-		_event.resetOriginalValues();
-	}
-
-	private final Event _event;
 }

@@ -14,22 +14,24 @@
 
 package com.dnebinger.subsystem.events.service.persistence;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.dnebinger.subsystem.events.model.RelatedEvent;
-
-import com.liferay.osgi.util.ServiceTrackerFactory;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
-import org.osgi.util.tracker.ServiceTracker;
+import java.io.Serializable;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.util.tracker.ServiceTracker;
 
 /**
- * The persistence utility for the related event service. This utility wraps {@link com.dnebinger.subsystem.events.service.persistence.impl.RelatedEventPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
+ * The persistence utility for the related event service. This utility wraps <code>com.dnebinger.subsystem.events.service.persistence.impl.RelatedEventPersistenceImpl</code> and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -37,11 +39,10 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  * @see RelatedEventPersistence
- * @see com.dnebinger.subsystem.events.service.persistence.impl.RelatedEventPersistenceImpl
  * @generated
  */
-@ProviderType
 public class RelatedEventUtil {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -70,10 +71,20 @@ public class RelatedEventUtil {
 	}
 
 	/**
+	 * @see com.liferay.portal.kernel.service.persistence.BasePersistence#fetchByPrimaryKeys(Set)
+	 */
+	public static Map<Serializable, RelatedEvent> fetchByPrimaryKeys(
+		Set<Serializable> primaryKeys) {
+
+		return getPersistence().fetchByPrimaryKeys(primaryKeys);
+	}
+
+	/**
 	 * @see com.liferay.portal.kernel.service.persistence.BasePersistence#findWithDynamicQuery(DynamicQuery)
 	 */
 	public static List<RelatedEvent> findWithDynamicQuery(
 		DynamicQuery dynamicQuery) {
+
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
@@ -82,6 +93,7 @@ public class RelatedEventUtil {
 	 */
 	public static List<RelatedEvent> findWithDynamicQuery(
 		DynamicQuery dynamicQuery, int start, int end) {
+
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
@@ -91,9 +103,9 @@ public class RelatedEventUtil {
 	public static List<RelatedEvent> findWithDynamicQuery(
 		DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator<RelatedEvent> orderByComparator) {
-		return getPersistence()
-				   .findWithDynamicQuery(dynamicQuery, start, end,
-			orderByComparator);
+
+		return getPersistence().findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -106,204 +118,220 @@ public class RelatedEventUtil {
 	/**
 	 * @see com.liferay.portal.kernel.service.persistence.BasePersistence#update(com.liferay.portal.kernel.model.BaseModel, ServiceContext)
 	 */
-	public static RelatedEvent update(RelatedEvent relatedEvent,
-		ServiceContext serviceContext) {
+	public static RelatedEvent update(
+		RelatedEvent relatedEvent, ServiceContext serviceContext) {
+
 		return getPersistence().update(relatedEvent, serviceContext);
 	}
 
 	/**
-	* Returns all the related events where eventId = &#63;.
-	*
-	* @param eventId the event ID
-	* @return the matching related events
-	*/
+	 * Returns all the related events where eventId = &#63;.
+	 *
+	 * @param eventId the event ID
+	 * @return the matching related events
+	 */
 	public static List<RelatedEvent> findByEventId(long eventId) {
 		return getPersistence().findByEventId(eventId);
 	}
 
 	/**
-	* Returns a range of all the related events where eventId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link RelatedEventModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param eventId the event ID
-	* @param start the lower bound of the range of related events
-	* @param end the upper bound of the range of related events (not inclusive)
-	* @return the range of matching related events
-	*/
-	public static List<RelatedEvent> findByEventId(long eventId, int start,
-		int end) {
+	 * Returns a range of all the related events where eventId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RelatedEventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param eventId the event ID
+	 * @param start the lower bound of the range of related events
+	 * @param end the upper bound of the range of related events (not inclusive)
+	 * @return the range of matching related events
+	 */
+	public static List<RelatedEvent> findByEventId(
+		long eventId, int start, int end) {
+
 		return getPersistence().findByEventId(eventId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the related events where eventId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link RelatedEventModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param eventId the event ID
-	* @param start the lower bound of the range of related events
-	* @param end the upper bound of the range of related events (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching related events
-	*/
-	public static List<RelatedEvent> findByEventId(long eventId, int start,
-		int end, OrderByComparator<RelatedEvent> orderByComparator) {
-		return getPersistence()
-				   .findByEventId(eventId, start, end, orderByComparator);
+	 * Returns an ordered range of all the related events where eventId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RelatedEventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param eventId the event ID
+	 * @param start the lower bound of the range of related events
+	 * @param end the upper bound of the range of related events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching related events
+	 */
+	public static List<RelatedEvent> findByEventId(
+		long eventId, int start, int end,
+		OrderByComparator<RelatedEvent> orderByComparator) {
+
+		return getPersistence().findByEventId(
+			eventId, start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the related events where eventId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link RelatedEventModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param eventId the event ID
-	* @param start the lower bound of the range of related events
-	* @param end the upper bound of the range of related events (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of matching related events
-	*/
-	public static List<RelatedEvent> findByEventId(long eventId, int start,
-		int end, OrderByComparator<RelatedEvent> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findByEventId(eventId, start, end, orderByComparator,
-			retrieveFromCache);
+	 * Returns an ordered range of all the related events where eventId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RelatedEventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param eventId the event ID
+	 * @param start the lower bound of the range of related events
+	 * @param end the upper bound of the range of related events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching related events
+	 */
+	public static List<RelatedEvent> findByEventId(
+		long eventId, int start, int end,
+		OrderByComparator<RelatedEvent> orderByComparator,
+		boolean useFinderCache) {
+
+		return getPersistence().findByEventId(
+			eventId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
-	* Returns the first related event in the ordered set where eventId = &#63;.
-	*
-	* @param eventId the event ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching related event
-	* @throws NoSuchRelatedEventException if a matching related event could not be found
-	*/
-	public static RelatedEvent findByEventId_First(long eventId,
-		OrderByComparator<RelatedEvent> orderByComparator)
-		throws com.dnebinger.subsystem.events.exception.NoSuchRelatedEventException {
+	 * Returns the first related event in the ordered set where eventId = &#63;.
+	 *
+	 * @param eventId the event ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching related event
+	 * @throws NoSuchRelatedEventException if a matching related event could not be found
+	 */
+	public static RelatedEvent findByEventId_First(
+			long eventId, OrderByComparator<RelatedEvent> orderByComparator)
+		throws com.dnebinger.subsystem.events.exception.
+			NoSuchRelatedEventException {
+
 		return getPersistence().findByEventId_First(eventId, orderByComparator);
 	}
 
 	/**
-	* Returns the first related event in the ordered set where eventId = &#63;.
-	*
-	* @param eventId the event ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching related event, or <code>null</code> if a matching related event could not be found
-	*/
-	public static RelatedEvent fetchByEventId_First(long eventId,
-		OrderByComparator<RelatedEvent> orderByComparator) {
-		return getPersistence().fetchByEventId_First(eventId, orderByComparator);
+	 * Returns the first related event in the ordered set where eventId = &#63;.
+	 *
+	 * @param eventId the event ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching related event, or <code>null</code> if a matching related event could not be found
+	 */
+	public static RelatedEvent fetchByEventId_First(
+		long eventId, OrderByComparator<RelatedEvent> orderByComparator) {
+
+		return getPersistence().fetchByEventId_First(
+			eventId, orderByComparator);
 	}
 
 	/**
-	* Returns the last related event in the ordered set where eventId = &#63;.
-	*
-	* @param eventId the event ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching related event
-	* @throws NoSuchRelatedEventException if a matching related event could not be found
-	*/
-	public static RelatedEvent findByEventId_Last(long eventId,
-		OrderByComparator<RelatedEvent> orderByComparator)
-		throws com.dnebinger.subsystem.events.exception.NoSuchRelatedEventException {
+	 * Returns the last related event in the ordered set where eventId = &#63;.
+	 *
+	 * @param eventId the event ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching related event
+	 * @throws NoSuchRelatedEventException if a matching related event could not be found
+	 */
+	public static RelatedEvent findByEventId_Last(
+			long eventId, OrderByComparator<RelatedEvent> orderByComparator)
+		throws com.dnebinger.subsystem.events.exception.
+			NoSuchRelatedEventException {
+
 		return getPersistence().findByEventId_Last(eventId, orderByComparator);
 	}
 
 	/**
-	* Returns the last related event in the ordered set where eventId = &#63;.
-	*
-	* @param eventId the event ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching related event, or <code>null</code> if a matching related event could not be found
-	*/
-	public static RelatedEvent fetchByEventId_Last(long eventId,
-		OrderByComparator<RelatedEvent> orderByComparator) {
+	 * Returns the last related event in the ordered set where eventId = &#63;.
+	 *
+	 * @param eventId the event ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching related event, or <code>null</code> if a matching related event could not be found
+	 */
+	public static RelatedEvent fetchByEventId_Last(
+		long eventId, OrderByComparator<RelatedEvent> orderByComparator) {
+
 		return getPersistence().fetchByEventId_Last(eventId, orderByComparator);
 	}
 
 	/**
-	* Returns the related events before and after the current related event in the ordered set where eventId = &#63;.
-	*
-	* @param surrogateId the primary key of the current related event
-	* @param eventId the event ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next related event
-	* @throws NoSuchRelatedEventException if a related event with the primary key could not be found
-	*/
-	public static RelatedEvent[] findByEventId_PrevAndNext(long surrogateId,
-		long eventId, OrderByComparator<RelatedEvent> orderByComparator)
-		throws com.dnebinger.subsystem.events.exception.NoSuchRelatedEventException {
-		return getPersistence()
-				   .findByEventId_PrevAndNext(surrogateId, eventId,
-			orderByComparator);
+	 * Returns the related events before and after the current related event in the ordered set where eventId = &#63;.
+	 *
+	 * @param surrogateId the primary key of the current related event
+	 * @param eventId the event ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next related event
+	 * @throws NoSuchRelatedEventException if a related event with the primary key could not be found
+	 */
+	public static RelatedEvent[] findByEventId_PrevAndNext(
+			long surrogateId, long eventId,
+			OrderByComparator<RelatedEvent> orderByComparator)
+		throws com.dnebinger.subsystem.events.exception.
+			NoSuchRelatedEventException {
+
+		return getPersistence().findByEventId_PrevAndNext(
+			surrogateId, eventId, orderByComparator);
 	}
 
 	/**
-	* Removes all the related events where eventId = &#63; from the database.
-	*
-	* @param eventId the event ID
-	*/
+	 * Removes all the related events where eventId = &#63; from the database.
+	 *
+	 * @param eventId the event ID
+	 */
 	public static void removeByEventId(long eventId) {
 		getPersistence().removeByEventId(eventId);
 	}
 
 	/**
-	* Returns the number of related events where eventId = &#63;.
-	*
-	* @param eventId the event ID
-	* @return the number of matching related events
-	*/
+	 * Returns the number of related events where eventId = &#63;.
+	 *
+	 * @param eventId the event ID
+	 * @return the number of matching related events
+	 */
 	public static int countByEventId(long eventId) {
 		return getPersistence().countByEventId(eventId);
 	}
 
 	/**
-	* Caches the related event in the entity cache if it is enabled.
-	*
-	* @param relatedEvent the related event
-	*/
+	 * Caches the related event in the entity cache if it is enabled.
+	 *
+	 * @param relatedEvent the related event
+	 */
 	public static void cacheResult(RelatedEvent relatedEvent) {
 		getPersistence().cacheResult(relatedEvent);
 	}
 
 	/**
-	* Caches the related events in the entity cache if it is enabled.
-	*
-	* @param relatedEvents the related events
-	*/
+	 * Caches the related events in the entity cache if it is enabled.
+	 *
+	 * @param relatedEvents the related events
+	 */
 	public static void cacheResult(List<RelatedEvent> relatedEvents) {
 		getPersistence().cacheResult(relatedEvents);
 	}
 
 	/**
-	* Creates a new related event with the primary key. Does not add the related event to the database.
-	*
-	* @param surrogateId the primary key for the new related event
-	* @return the new related event
-	*/
+	 * Creates a new related event with the primary key. Does not add the related event to the database.
+	 *
+	 * @param surrogateId the primary key for the new related event
+	 * @return the new related event
+	 */
 	public static RelatedEvent create(long surrogateId) {
 		return getPersistence().create(surrogateId);
 	}
 
 	/**
-	* Removes the related event with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param surrogateId the primary key of the related event
-	* @return the related event that was removed
-	* @throws NoSuchRelatedEventException if a related event with the primary key could not be found
-	*/
+	 * Removes the related event with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param surrogateId the primary key of the related event
+	 * @return the related event that was removed
+	 * @throws NoSuchRelatedEventException if a related event with the primary key could not be found
+	 */
 	public static RelatedEvent remove(long surrogateId)
-		throws com.dnebinger.subsystem.events.exception.NoSuchRelatedEventException {
+		throws com.dnebinger.subsystem.events.exception.
+			NoSuchRelatedEventException {
+
 		return getPersistence().remove(surrogateId);
 	}
 
@@ -312,105 +340,104 @@ public class RelatedEventUtil {
 	}
 
 	/**
-	* Returns the related event with the primary key or throws a {@link NoSuchRelatedEventException} if it could not be found.
-	*
-	* @param surrogateId the primary key of the related event
-	* @return the related event
-	* @throws NoSuchRelatedEventException if a related event with the primary key could not be found
-	*/
+	 * Returns the related event with the primary key or throws a <code>NoSuchRelatedEventException</code> if it could not be found.
+	 *
+	 * @param surrogateId the primary key of the related event
+	 * @return the related event
+	 * @throws NoSuchRelatedEventException if a related event with the primary key could not be found
+	 */
 	public static RelatedEvent findByPrimaryKey(long surrogateId)
-		throws com.dnebinger.subsystem.events.exception.NoSuchRelatedEventException {
+		throws com.dnebinger.subsystem.events.exception.
+			NoSuchRelatedEventException {
+
 		return getPersistence().findByPrimaryKey(surrogateId);
 	}
 
 	/**
-	* Returns the related event with the primary key or returns <code>null</code> if it could not be found.
-	*
-	* @param surrogateId the primary key of the related event
-	* @return the related event, or <code>null</code> if a related event with the primary key could not be found
-	*/
+	 * Returns the related event with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param surrogateId the primary key of the related event
+	 * @return the related event, or <code>null</code> if a related event with the primary key could not be found
+	 */
 	public static RelatedEvent fetchByPrimaryKey(long surrogateId) {
 		return getPersistence().fetchByPrimaryKey(surrogateId);
 	}
 
-	public static java.util.Map<java.io.Serializable, RelatedEvent> fetchByPrimaryKeys(
-		java.util.Set<java.io.Serializable> primaryKeys) {
-		return getPersistence().fetchByPrimaryKeys(primaryKeys);
-	}
-
 	/**
-	* Returns all the related events.
-	*
-	* @return the related events
-	*/
+	 * Returns all the related events.
+	 *
+	 * @return the related events
+	 */
 	public static List<RelatedEvent> findAll() {
 		return getPersistence().findAll();
 	}
 
 	/**
-	* Returns a range of all the related events.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link RelatedEventModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of related events
-	* @param end the upper bound of the range of related events (not inclusive)
-	* @return the range of related events
-	*/
+	 * Returns a range of all the related events.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RelatedEventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of related events
+	 * @param end the upper bound of the range of related events (not inclusive)
+	 * @return the range of related events
+	 */
 	public static List<RelatedEvent> findAll(int start, int end) {
 		return getPersistence().findAll(start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the related events.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link RelatedEventModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of related events
-	* @param end the upper bound of the range of related events (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of related events
-	*/
-	public static List<RelatedEvent> findAll(int start, int end,
-		OrderByComparator<RelatedEvent> orderByComparator) {
+	 * Returns an ordered range of all the related events.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RelatedEventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of related events
+	 * @param end the upper bound of the range of related events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of related events
+	 */
+	public static List<RelatedEvent> findAll(
+		int start, int end, OrderByComparator<RelatedEvent> orderByComparator) {
+
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	/**
-	* Returns an ordered range of all the related events.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link RelatedEventModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param start the lower bound of the range of related events
-	* @param end the upper bound of the range of related events (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the ordered range of related events
-	*/
-	public static List<RelatedEvent> findAll(int start, int end,
-		OrderByComparator<RelatedEvent> orderByComparator,
-		boolean retrieveFromCache) {
-		return getPersistence()
-				   .findAll(start, end, orderByComparator, retrieveFromCache);
+	 * Returns an ordered range of all the related events.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RelatedEventModelImpl</code>.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of related events
+	 * @param end the upper bound of the range of related events (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of related events
+	 */
+	public static List<RelatedEvent> findAll(
+		int start, int end, OrderByComparator<RelatedEvent> orderByComparator,
+		boolean useFinderCache) {
+
+		return getPersistence().findAll(
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
-	* Removes all the related events from the database.
-	*/
+	 * Removes all the related events from the database.
+	 */
 	public static void removeAll() {
 		getPersistence().removeAll();
 	}
 
 	/**
-	* Returns the number of related events.
-	*
-	* @return the number of related events
-	*/
+	 * Returns the number of related events.
+	 *
+	 * @return the number of related events
+	 */
 	public static int countAll() {
 		return getPersistence().countAll();
 	}
@@ -419,6 +446,22 @@ public class RelatedEventUtil {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<RelatedEventPersistence, RelatedEventPersistence> _serviceTracker =
-		ServiceTrackerFactory.open(RelatedEventPersistence.class);
+	private static ServiceTracker
+		<RelatedEventPersistence, RelatedEventPersistence> _serviceTracker;
+
+	static {
+		Bundle bundle = FrameworkUtil.getBundle(RelatedEventPersistence.class);
+
+		ServiceTracker<RelatedEventPersistence, RelatedEventPersistence>
+			serviceTracker =
+				new ServiceTracker
+					<RelatedEventPersistence, RelatedEventPersistence>(
+						bundle.getBundleContext(),
+						RelatedEventPersistence.class, null);
+
+		serviceTracker.open();
+
+		_serviceTracker = serviceTracker;
+	}
+
 }

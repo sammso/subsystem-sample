@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -25,11 +23,12 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.dnebinger.subsystem.events.service.http.RelatedEventServiceSoap}.
  *
  * @author Brian Wing Shun Chan
- * @see com.dnebinger.subsystem.events.service.http.RelatedEventServiceSoap
+ * @deprecated As of Athanasius (7.3.x), with no direct replacement
  * @generated
  */
-@ProviderType
+@Deprecated
 public class RelatedEventSoap implements Serializable {
+
 	public static RelatedEventSoap toSoapModel(RelatedEvent model) {
 		RelatedEventSoap soapModel = new RelatedEventSoap();
 
@@ -68,7 +67,8 @@ public class RelatedEventSoap implements Serializable {
 	}
 
 	public static RelatedEventSoap[] toSoapModels(List<RelatedEvent> models) {
-		List<RelatedEventSoap> soapModels = new ArrayList<RelatedEventSoap>(models.size());
+		List<RelatedEventSoap> soapModels = new ArrayList<RelatedEventSoap>(
+			models.size());
 
 		for (RelatedEvent model : models) {
 			soapModels.add(toSoapModel(model));
@@ -115,4 +115,5 @@ public class RelatedEventSoap implements Serializable {
 	private long _surrogateId;
 	private long _eventId;
 	private long _relatedEventId;
+
 }

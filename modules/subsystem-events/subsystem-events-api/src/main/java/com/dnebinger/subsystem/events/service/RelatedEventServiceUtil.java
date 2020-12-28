@@ -14,40 +14,36 @@
 
 package com.dnebinger.subsystem.events.service;
 
-import aQute.bnd.annotation.ProviderType;
-
-import com.liferay.osgi.util.ServiceTrackerFactory;
-
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the remote service utility for RelatedEvent. This utility wraps
- * {@link com.dnebinger.subsystem.events.service.impl.RelatedEventServiceImpl} and is the
- * primary access point for service operations in application layer code running
- * on a remote server. Methods of this service are expected to have security
- * checks based on the propagated JAAS credentials because this service can be
+ * <code>com.dnebinger.subsystem.events.service.impl.RelatedEventServiceImpl</code> and is an
+ * access point for service operations in application layer code running on a
+ * remote server. Methods of this service are expected to have security checks
+ * based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
  * @author Brian Wing Shun Chan
  * @see RelatedEventService
- * @see com.dnebinger.subsystem.events.service.base.RelatedEventServiceBaseImpl
- * @see com.dnebinger.subsystem.events.service.impl.RelatedEventServiceImpl
  * @generated
  */
-@ProviderType
 public class RelatedEventServiceUtil {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.dnebinger.subsystem.events.service.impl.RelatedEventServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to <code>com.dnebinger.subsystem.events.service.impl.RelatedEventServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
-	public static java.lang.String getOSGiServiceIdentifier() {
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
+	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
 	}
 
@@ -55,6 +51,20 @@ public class RelatedEventServiceUtil {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<RelatedEventService, RelatedEventService> _serviceTracker =
-		ServiceTrackerFactory.open(RelatedEventService.class);
+	private static ServiceTracker<RelatedEventService, RelatedEventService>
+		_serviceTracker;
+
+	static {
+		Bundle bundle = FrameworkUtil.getBundle(RelatedEventService.class);
+
+		ServiceTracker<RelatedEventService, RelatedEventService>
+			serviceTracker =
+				new ServiceTracker<RelatedEventService, RelatedEventService>(
+					bundle.getBundleContext(), RelatedEventService.class, null);
+
+		serviceTracker.open();
+
+		_serviceTracker = serviceTracker;
+	}
+
 }

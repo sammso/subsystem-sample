@@ -10,6 +10,51 @@
 	<artifactId>subsystem-events</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
+	<profiles>
+		<profile>
+			<id>standalone</id>
+
+			<!-- Uncomment the following element if the project is not in workspace -->
+
+			<!--<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>-->
+			<properties>
+				<liferay.bom.version>7.3.5</liferay.bom.version>
+			</properties>
+			<dependencyManagement>
+				<dependencies>
+					<dependency>
+						<groupId>com.liferay.portal</groupId>
+						<artifactId>release.portal.bom</artifactId>
+						<version>${liferay.bom.version}</version>
+						<type>pom</type>
+						<scope>import</scope>
+					</dependency>
+					<dependency>
+						<groupId>com.liferay.portal</groupId>
+						<artifactId>release.portal.bom.compile.only</artifactId>
+						<version>${liferay.bom.version}</version>
+						<type>pom</type>
+						<scope>import</scope>
+					</dependency>
+					<dependency>
+						<groupId>com.liferay.portal</groupId>
+						<artifactId>release.portal.bom.third.party</artifactId>
+						<version>${liferay.bom.version}</version>
+						<type>pom</type>
+						<scope>import</scope>
+					</dependency>
+				</dependencies>
+			</dependencyManagement>
+			<repositories>
+				<repository>
+					<id>liferay-public</id>
+					<url>https://repository-cdn.liferay.com/nexus/content/groups/public/</url>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -27,7 +72,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.6</version>
+				<version>3.1.2</version>
 				<configuration>
 					<archive>
 						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
@@ -37,7 +82,7 @@
 			<plugin>
 				<groupId>biz.aQute.bnd</groupId>
 				<artifactId>bnd-maven-plugin</artifactId>
-				<version>3.3.0</version>
+				<version>4.3.0</version>
 				<executions>
 					<execution>
 						<goals>
@@ -49,12 +94,12 @@
 					<dependency>
 						<groupId>biz.aQute.bnd</groupId>
 						<artifactId>biz.aQute.bndlib</artifactId>
-						<version>3.2.0</version>
+						<version>4.3.0</version>
 					</dependency>
 					<dependency>
 						<groupId>com.liferay</groupId>
 						<artifactId>com.liferay.ant.bnd</artifactId>
-						<version>2.0.37</version>
+						<version>3.2.6</version>
 					</dependency>
 				</dependencies>
 			</plugin>

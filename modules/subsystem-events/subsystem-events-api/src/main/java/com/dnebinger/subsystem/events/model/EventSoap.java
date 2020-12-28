@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -26,11 +24,12 @@ import java.util.List;
  * This class is used by SOAP remote services, specifically {@link com.dnebinger.subsystem.events.service.http.EventServiceSoap}.
  *
  * @author Brian Wing Shun Chan
- * @see com.dnebinger.subsystem.events.service.http.EventServiceSoap
+ * @deprecated As of Athanasius (7.3.x), with no direct replacement
  * @generated
  */
-@ProviderType
+@Deprecated
 public class EventSoap implements Serializable {
+
 	public static EventSoap toSoapModel(Event model) {
 		EventSoap soapModel = new EventSoap();
 
@@ -39,7 +38,7 @@ public class EventSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setOccursOn(model.getOccursOn());
 		soapModel.setEndsOn(model.getEndsOn());
-		soapModel.setAdultOnly(model.getAdultOnly());
+		soapModel.setAdultOnly(model.isAdultOnly());
 		soapModel.setMaxOccupants(model.getMaxOccupants());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setFloor(model.getFloor());
@@ -200,4 +199,5 @@ public class EventSoap implements Serializable {
 	private int _floor;
 	private String _room;
 	private long _organizer;
+
 }

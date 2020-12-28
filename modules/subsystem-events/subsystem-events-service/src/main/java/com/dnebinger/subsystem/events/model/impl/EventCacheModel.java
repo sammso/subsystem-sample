@@ -14,14 +14,11 @@
 
 package com.dnebinger.subsystem.events.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.dnebinger.subsystem.events.model.Event;
 
+import com.liferay.petra.lang.HashUtil;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.model.CacheModel;
-import com.liferay.portal.kernel.util.HashUtil;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -34,22 +31,21 @@ import java.util.Date;
  * The cache model class for representing Event in entity cache.
  *
  * @author Brian Wing Shun Chan
- * @see Event
  * @generated
  */
-@ProviderType
 public class EventCacheModel implements CacheModel<Event>, Externalizable {
+
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
+	public boolean equals(Object object) {
+		if (this == object) {
 			return true;
 		}
 
-		if (!(obj instanceof EventCacheModel)) {
+		if (!(object instanceof EventCacheModel)) {
 			return false;
 		}
 
-		EventCacheModel eventCacheModel = (EventCacheModel)obj;
+		EventCacheModel eventCacheModel = (EventCacheModel)object;
 
 		if (eventId == eventCacheModel.eventId) {
 			return true;
@@ -99,7 +95,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		EventImpl eventImpl = new EventImpl();
 
 		if (uuid == null) {
-			eventImpl.setUuid(StringPool.BLANK);
+			eventImpl.setUuid("");
 		}
 		else {
 			eventImpl.setUuid(uuid);
@@ -108,7 +104,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		eventImpl.setEventId(eventId);
 
 		if (name == null) {
-			eventImpl.setName(StringPool.BLANK);
+			eventImpl.setName("");
 		}
 		else {
 			eventImpl.setName(name);
@@ -132,7 +128,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		eventImpl.setMaxOccupants(maxOccupants);
 
 		if (description == null) {
-			eventImpl.setDescription(StringPool.BLANK);
+			eventImpl.setDescription("");
 		}
 		else {
 			eventImpl.setDescription(description);
@@ -141,7 +137,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		eventImpl.setFloor(floor);
 
 		if (room == null) {
-			eventImpl.setRoom(StringPool.BLANK);
+			eventImpl.setRoom("");
 		}
 		else {
 			eventImpl.setRoom(room);
@@ -175,10 +171,9 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		if (uuid == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
+			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(uuid);
@@ -187,7 +182,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		objectOutput.writeLong(eventId);
 
 		if (name == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
+			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(name);
@@ -201,7 +196,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		objectOutput.writeInt(maxOccupants);
 
 		if (description == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
+			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(description);
@@ -210,7 +205,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		objectOutput.writeInt(floor);
 
 		if (room == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
+			objectOutput.writeUTF("");
 		}
 		else {
 			objectOutput.writeUTF(room);
@@ -230,4 +225,5 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 	public int floor;
 	public String room;
 	public long organizer;
+
 }

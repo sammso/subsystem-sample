@@ -14,13 +14,11 @@
 
 package com.dnebinger.subsystem.events.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.dnebinger.subsystem.events.model.EventAttendee;
 
+import com.liferay.petra.lang.HashUtil;
+import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.model.CacheModel;
-import com.liferay.portal.kernel.util.HashUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -31,23 +29,23 @@ import java.io.ObjectOutput;
  * The cache model class for representing EventAttendee in entity cache.
  *
  * @author Brian Wing Shun Chan
- * @see EventAttendee
  * @generated
  */
-@ProviderType
-public class EventAttendeeCacheModel implements CacheModel<EventAttendee>,
-	Externalizable {
+public class EventAttendeeCacheModel
+	implements CacheModel<EventAttendee>, Externalizable {
+
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
+	public boolean equals(Object object) {
+		if (this == object) {
 			return true;
 		}
 
-		if (!(obj instanceof EventAttendeeCacheModel)) {
+		if (!(object instanceof EventAttendeeCacheModel)) {
 			return false;
 		}
 
-		EventAttendeeCacheModel eventAttendeeCacheModel = (EventAttendeeCacheModel)obj;
+		EventAttendeeCacheModel eventAttendeeCacheModel =
+			(EventAttendeeCacheModel)object;
 
 		if (surrogateId == eventAttendeeCacheModel.surrogateId) {
 			return true;
@@ -99,8 +97,7 @@ public class EventAttendeeCacheModel implements CacheModel<EventAttendee>,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput objectOutput)
-		throws IOException {
+	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(surrogateId);
 
 		objectOutput.writeLong(eventId);
@@ -111,4 +108,5 @@ public class EventAttendeeCacheModel implements CacheModel<EventAttendee>,
 	public long surrogateId;
 	public long eventId;
 	public long userId;
+
 }

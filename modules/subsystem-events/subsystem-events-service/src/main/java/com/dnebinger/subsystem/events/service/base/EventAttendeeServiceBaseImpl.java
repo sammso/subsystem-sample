@@ -44,15 +44,16 @@ import javax.sql.DataSource;
  *
  * @author Brian Wing Shun Chan
  * @see com.dnebinger.subsystem.events.service.impl.EventAttendeeServiceImpl
- * @see com.dnebinger.subsystem.events.service.EventAttendeeServiceUtil
  * @generated
  */
-public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
+public abstract class EventAttendeeServiceBaseImpl
+	extends BaseServiceImpl
 	implements EventAttendeeService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.dnebinger.subsystem.events.service.EventAttendeeServiceUtil} to access the event attendee remote service.
+	 * Never modify or reference this class directly. Use <code>EventAttendeeService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.dnebinger.subsystem.events.service.EventAttendeeServiceUtil</code>.
 	 */
 
 	/**
@@ -60,7 +61,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the event local service
 	 */
-	public com.dnebinger.subsystem.events.service.EventLocalService getEventLocalService() {
+	public com.dnebinger.subsystem.events.service.EventLocalService
+		getEventLocalService() {
+
 		return eventLocalService;
 	}
 
@@ -70,7 +73,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 * @param eventLocalService the event local service
 	 */
 	public void setEventLocalService(
-		com.dnebinger.subsystem.events.service.EventLocalService eventLocalService) {
+		com.dnebinger.subsystem.events.service.EventLocalService
+			eventLocalService) {
+
 		this.eventLocalService = eventLocalService;
 	}
 
@@ -79,7 +84,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the event remote service
 	 */
-	public com.dnebinger.subsystem.events.service.EventService getEventService() {
+	public com.dnebinger.subsystem.events.service.EventService
+		getEventService() {
+
 		return eventService;
 	}
 
@@ -90,6 +97,7 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setEventService(
 		com.dnebinger.subsystem.events.service.EventService eventService) {
+
 		this.eventService = eventService;
 	}
 
@@ -116,7 +124,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the event attendee local service
 	 */
-	public com.dnebinger.subsystem.events.service.EventAttendeeLocalService getEventAttendeeLocalService() {
+	public com.dnebinger.subsystem.events.service.EventAttendeeLocalService
+		getEventAttendeeLocalService() {
+
 		return eventAttendeeLocalService;
 	}
 
@@ -126,7 +136,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 * @param eventAttendeeLocalService the event attendee local service
 	 */
 	public void setEventAttendeeLocalService(
-		com.dnebinger.subsystem.events.service.EventAttendeeLocalService eventAttendeeLocalService) {
+		com.dnebinger.subsystem.events.service.EventAttendeeLocalService
+			eventAttendeeLocalService) {
+
 		this.eventAttendeeLocalService = eventAttendeeLocalService;
 	}
 
@@ -146,6 +158,7 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setEventAttendeeService(
 		EventAttendeeService eventAttendeeService) {
+
 		this.eventAttendeeService = eventAttendeeService;
 	}
 
@@ -165,6 +178,7 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setEventAttendeePersistence(
 		EventAttendeePersistence eventAttendeePersistence) {
+
 		this.eventAttendeePersistence = eventAttendeePersistence;
 	}
 
@@ -173,7 +187,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the related event local service
 	 */
-	public com.dnebinger.subsystem.events.service.RelatedEventLocalService getRelatedEventLocalService() {
+	public com.dnebinger.subsystem.events.service.RelatedEventLocalService
+		getRelatedEventLocalService() {
+
 		return relatedEventLocalService;
 	}
 
@@ -183,7 +199,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 * @param relatedEventLocalService the related event local service
 	 */
 	public void setRelatedEventLocalService(
-		com.dnebinger.subsystem.events.service.RelatedEventLocalService relatedEventLocalService) {
+		com.dnebinger.subsystem.events.service.RelatedEventLocalService
+			relatedEventLocalService) {
+
 		this.relatedEventLocalService = relatedEventLocalService;
 	}
 
@@ -192,7 +210,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the related event remote service
 	 */
-	public com.dnebinger.subsystem.events.service.RelatedEventService getRelatedEventService() {
+	public com.dnebinger.subsystem.events.service.RelatedEventService
+		getRelatedEventService() {
+
 		return relatedEventService;
 	}
 
@@ -202,7 +222,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 * @param relatedEventService the related event remote service
 	 */
 	public void setRelatedEventService(
-		com.dnebinger.subsystem.events.service.RelatedEventService relatedEventService) {
+		com.dnebinger.subsystem.events.service.RelatedEventService
+			relatedEventService) {
+
 		this.relatedEventService = relatedEventService;
 	}
 
@@ -222,6 +244,7 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setRelatedEventPersistence(
 		RelatedEventPersistence relatedEventPersistence) {
+
 		this.relatedEventPersistence = relatedEventPersistence;
 	}
 
@@ -230,7 +253,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -240,7 +265,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -249,7 +276,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -259,7 +288,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -268,7 +299,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the class name remote service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameService getClassNameService() {
+	public com.liferay.portal.kernel.service.ClassNameService
+		getClassNameService() {
+
 		return classNameService;
 	}
 
@@ -279,6 +312,7 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setClassNameService(
 		com.liferay.portal.kernel.service.ClassNameService classNameService) {
+
 		this.classNameService = classNameService;
 	}
 
@@ -298,6 +332,7 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -306,7 +341,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -316,7 +353,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -325,7 +364,9 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -336,6 +377,7 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -355,6 +397,7 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setUserService(
 		com.liferay.portal.kernel.service.UserService userService) {
+
 		this.userService = userService;
 	}
 
@@ -414,48 +457,96 @@ public abstract class EventAttendeeServiceBaseImpl extends BaseServiceImpl
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+		catch (Exception exception) {
+			throw new SystemException(exception);
 		}
 	}
 
-	@BeanReference(type = com.dnebinger.subsystem.events.service.EventLocalService.class)
-	protected com.dnebinger.subsystem.events.service.EventLocalService eventLocalService;
-	@BeanReference(type = com.dnebinger.subsystem.events.service.EventService.class)
+	@BeanReference(
+		type = com.dnebinger.subsystem.events.service.EventLocalService.class
+	)
+	protected com.dnebinger.subsystem.events.service.EventLocalService
+		eventLocalService;
+
+	@BeanReference(
+		type = com.dnebinger.subsystem.events.service.EventService.class
+	)
 	protected com.dnebinger.subsystem.events.service.EventService eventService;
+
 	@BeanReference(type = EventPersistence.class)
 	protected EventPersistence eventPersistence;
-	@BeanReference(type = com.dnebinger.subsystem.events.service.EventAttendeeLocalService.class)
-	protected com.dnebinger.subsystem.events.service.EventAttendeeLocalService eventAttendeeLocalService;
+
+	@BeanReference(
+		type = com.dnebinger.subsystem.events.service.EventAttendeeLocalService.class
+	)
+	protected com.dnebinger.subsystem.events.service.EventAttendeeLocalService
+		eventAttendeeLocalService;
+
 	@BeanReference(type = EventAttendeeService.class)
 	protected EventAttendeeService eventAttendeeService;
+
 	@BeanReference(type = EventAttendeePersistence.class)
 	protected EventAttendeePersistence eventAttendeePersistence;
-	@BeanReference(type = com.dnebinger.subsystem.events.service.RelatedEventLocalService.class)
-	protected com.dnebinger.subsystem.events.service.RelatedEventLocalService relatedEventLocalService;
-	@BeanReference(type = com.dnebinger.subsystem.events.service.RelatedEventService.class)
-	protected com.dnebinger.subsystem.events.service.RelatedEventService relatedEventService;
+
+	@BeanReference(
+		type = com.dnebinger.subsystem.events.service.RelatedEventLocalService.class
+	)
+	protected com.dnebinger.subsystem.events.service.RelatedEventLocalService
+		relatedEventLocalService;
+
+	@BeanReference(
+		type = com.dnebinger.subsystem.events.service.RelatedEventService.class
+	)
+	protected com.dnebinger.subsystem.events.service.RelatedEventService
+		relatedEventService;
+
 	@BeanReference(type = RelatedEventPersistence.class)
 	protected RelatedEventPersistence relatedEventPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameService.class)
-	protected com.liferay.portal.kernel.service.ClassNameService classNameService;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameService
+		classNameService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserService.class)
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserService.class
+	)
 	protected com.liferay.portal.kernel.service.UserService userService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 }

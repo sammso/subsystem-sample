@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,21 +23,22 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see EventAttendeeService
  * @generated
  */
-@ProviderType
-public class EventAttendeeServiceWrapper implements EventAttendeeService,
-	ServiceWrapper<EventAttendeeService> {
+public class EventAttendeeServiceWrapper
+	implements EventAttendeeService, ServiceWrapper<EventAttendeeService> {
+
 	public EventAttendeeServiceWrapper(
 		EventAttendeeService eventAttendeeService) {
+
 		_eventAttendeeService = eventAttendeeService;
 	}
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
-	public java.lang.String getOSGiServiceIdentifier() {
+	public String getOSGiServiceIdentifier() {
 		return _eventAttendeeService.getOSGiServiceIdentifier();
 	}
 
@@ -54,4 +53,5 @@ public class EventAttendeeServiceWrapper implements EventAttendeeService,
 	}
 
 	private EventAttendeeService _eventAttendeeService;
+
 }

@@ -6,32 +6,32 @@
 	<import class="com.dnebinger.subsystem.events.model.EventAttendee" />
 	<import class="com.dnebinger.subsystem.events.model.RelatedEvent" />
 	<class name="com.dnebinger.subsystem.events.model.impl.EventImpl" table="SUBSYS_Event">
-		<id name="eventId" type="long">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="eventId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="occursOn" type="org.hibernate.type.TimestampType" />
-		<property name="endsOn" type="org.hibernate.type.TimestampType" />
-		<property name="adultOnly" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="maxOccupants" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="floor" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="room" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="organizer" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="occursOn" type="org.hibernate.type.TimestampType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="endsOn" type="org.hibernate.type.TimestampType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="adultOnly" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="maxOccupants" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="floor" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="room" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="organizer" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.dnebinger.subsystem.events.model.impl.EventAttendeeImpl" table="SUBSYS_EventAttendee">
-		<id name="surrogateId" type="long">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="surrogateId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="eventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="eventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.dnebinger.subsystem.events.model.impl.RelatedEventImpl" table="SUBSYS_RelatedEvent">
-		<id name="surrogateId" type="long">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="surrogateId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="eventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="relatedEventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="eventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="relatedEventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

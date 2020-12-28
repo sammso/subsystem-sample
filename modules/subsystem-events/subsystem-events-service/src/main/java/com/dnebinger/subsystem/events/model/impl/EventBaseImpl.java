@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.dnebinger.subsystem.events.model.Event;
 import com.dnebinger.subsystem.events.service.EventLocalServiceUtil;
 
@@ -31,12 +29,12 @@ import com.dnebinger.subsystem.events.service.EventLocalServiceUtil;
  * @see Event
  * @generated
  */
-@ProviderType
 public abstract class EventBaseImpl extends EventModelImpl implements Event {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a event model instance should use the {@link Event} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a event model instance should use the <code>Event</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -47,4 +45,5 @@ public abstract class EventBaseImpl extends EventModelImpl implements Event {
 			EventLocalServiceUtil.updateEvent(this);
 		}
 	}
+
 }

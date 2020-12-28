@@ -14,58 +14,61 @@
 
 package com.dnebinger.subsystem.events.service;
 
-import aQute.bnd.annotation.ProviderType;
-
-import com.liferay.osgi.util.ServiceTrackerFactory;
-
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * Provides the remote service utility for Event. This utility wraps
- * {@link com.dnebinger.subsystem.events.service.impl.EventServiceImpl} and is the
- * primary access point for service operations in application layer code running
- * on a remote server. Methods of this service are expected to have security
- * checks based on the propagated JAAS credentials because this service can be
+ * <code>com.dnebinger.subsystem.events.service.impl.EventServiceImpl</code> and is an
+ * access point for service operations in application layer code running on a
+ * remote server. Methods of this service are expected to have security checks
+ * based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
  * @author Brian Wing Shun Chan
  * @see EventService
- * @see com.dnebinger.subsystem.events.service.base.EventServiceBaseImpl
- * @see com.dnebinger.subsystem.events.service.impl.EventServiceImpl
  * @generated
  */
-@ProviderType
 public class EventServiceUtil {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.dnebinger.subsystem.events.service.impl.EventServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to <code>com.dnebinger.subsystem.events.service.impl.EventServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.dnebinger.subsystem.events.model.Event getEvent(
 		long eventId) {
+
 		return getService().getEvent(eventId);
 	}
 
-	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
-	public static java.lang.String getOSGiServiceIdentifier() {
-		return getService().getOSGiServiceIdentifier();
-	}
+	public static java.util.List
+		<com.dnebinger.subsystem.events.model.EventAttendee> getEventAttendees(
+			long eventId) {
 
-	public static java.util.List<com.dnebinger.subsystem.events.model.EventAttendee> getEventAttendees(
-		long eventId) {
 		return getService().getEventAttendees(eventId);
 	}
 
-	public static java.util.List<com.dnebinger.subsystem.events.model.Event> getEvents() {
+	public static java.util.List<com.dnebinger.subsystem.events.model.Event>
+		getEvents() {
+
 		return getService().getEvents();
 	}
 
-	public static java.util.List<com.dnebinger.subsystem.events.model.RelatedEvent> getRelatedEvents(
-		long eventId) {
+	/**
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
+	public static String getOSGiServiceIdentifier() {
+		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static java.util.List
+		<com.dnebinger.subsystem.events.model.RelatedEvent> getRelatedEvents(
+			long eventId) {
+
 		return getService().getRelatedEvents(eventId);
 	}
 
@@ -73,5 +76,18 @@ public class EventServiceUtil {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<EventService, EventService> _serviceTracker = ServiceTrackerFactory.open(EventService.class);
+	private static ServiceTracker<EventService, EventService> _serviceTracker;
+
+	static {
+		Bundle bundle = FrameworkUtil.getBundle(EventService.class);
+
+		ServiceTracker<EventService, EventService> serviceTracker =
+			new ServiceTracker<EventService, EventService>(
+				bundle.getBundleContext(), EventService.class, null);
+
+		serviceTracker.open();
+
+		_serviceTracker = serviceTracker;
+	}
+
 }

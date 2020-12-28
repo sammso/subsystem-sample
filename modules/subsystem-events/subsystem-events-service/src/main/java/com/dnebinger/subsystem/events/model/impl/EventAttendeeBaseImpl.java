@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.dnebinger.subsystem.events.model.EventAttendee;
 import com.dnebinger.subsystem.events.service.EventAttendeeLocalServiceUtil;
 
@@ -31,13 +29,13 @@ import com.dnebinger.subsystem.events.service.EventAttendeeLocalServiceUtil;
  * @see EventAttendee
  * @generated
  */
-@ProviderType
-public abstract class EventAttendeeBaseImpl extends EventAttendeeModelImpl
-	implements EventAttendee {
+public abstract class EventAttendeeBaseImpl
+	extends EventAttendeeModelImpl implements EventAttendee {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a event attendee model instance should use the {@link EventAttendee} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a event attendee model instance should use the <code>EventAttendee</code> interface instead.
 	 */
 	@Override
 	public void persist() {
@@ -48,4 +46,5 @@ public abstract class EventAttendeeBaseImpl extends EventAttendeeModelImpl
 			EventAttendeeLocalServiceUtil.updateEventAttendee(this);
 		}
 	}
+
 }

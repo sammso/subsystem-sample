@@ -14,23 +14,22 @@
 
 package com.dnebinger.subsystem.events.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 /**
  * Provides the SOAP utility for the
- * {@link com.dnebinger.subsystem.events.service.RelatedEventServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>com.dnebinger.subsystem.events.service.RelatedEventServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.dnebinger.subsystem.events.model.RelatedEventSoap}.
- * If the method in the service utility returns a
- * {@link com.dnebinger.subsystem.events.model.RelatedEvent}, that is translated to a
- * {@link com.dnebinger.subsystem.events.model.RelatedEventSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.dnebinger.subsystem.events.model.RelatedEventSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.dnebinger.subsystem.events.model.RelatedEvent</code>, that is translated to a
+ * <code>com.dnebinger.subsystem.events.model.RelatedEventSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -52,10 +51,9 @@ import aQute.bnd.annotation.ProviderType;
  *
  * @author Brian Wing Shun Chan
  * @see RelatedEventServiceHttp
- * @see com.dnebinger.subsystem.events.model.RelatedEventSoap
- * @see com.dnebinger.subsystem.events.service.RelatedEventServiceUtil
+ * @deprecated As of Athanasius (7.3.x), with no direct replacement
  * @generated
  */
-@ProviderType
+@Deprecated
 public class RelatedEventServiceSoap {
 }

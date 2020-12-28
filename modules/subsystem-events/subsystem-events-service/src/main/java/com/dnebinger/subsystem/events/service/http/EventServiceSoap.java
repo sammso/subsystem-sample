@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.dnebinger.subsystem.events.service.EventServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
@@ -25,19 +23,20 @@ import java.rmi.RemoteException;
 
 /**
  * Provides the SOAP utility for the
- * {@link EventServiceUtil} service utility. The
- * static methods of this class calls the same methods of the service utility.
- * However, the signatures are different because it is difficult for SOAP to
- * support certain types.
+ * <code>EventServiceUtil</code> service
+ * utility. The static methods of this class call the same methods of the
+ * service utility. However, the signatures are different because it is
+ * difficult for SOAP to support certain types.
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.dnebinger.subsystem.events.model.EventSoap}.
- * If the method in the service utility returns a
- * {@link com.dnebinger.subsystem.events.model.Event}, that is translated to a
- * {@link com.dnebinger.subsystem.events.model.EventSoap}. Methods that SOAP cannot
- * safely wire are skipped.
+ * if the method in the service utility returns a <code>java.util.List</code>,
+ * that is translated to an array of
+ * <code>com.dnebinger.subsystem.events.model.EventSoap</code>. If the method in the
+ * service utility returns a
+ * <code>com.dnebinger.subsystem.events.model.Event</code>, that is translated to a
+ * <code>com.dnebinger.subsystem.events.model.EventSoap</code>. Methods that SOAP
+ * cannot safely wire are skipped.
  * </p>
  *
  * <p>
@@ -59,70 +58,83 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  * @see EventServiceHttp
- * @see com.dnebinger.subsystem.events.model.EventSoap
- * @see EventServiceUtil
+ * @deprecated As of Athanasius (7.3.x), with no direct replacement
  * @generated
  */
-@ProviderType
+@Deprecated
 public class EventServiceSoap {
+
 	public static com.dnebinger.subsystem.events.model.EventSoap getEvent(
-		long eventId) throws RemoteException {
+			long eventId)
+		throws RemoteException {
+
 		try {
-			com.dnebinger.subsystem.events.model.Event returnValue = EventServiceUtil.getEvent(eventId);
+			com.dnebinger.subsystem.events.model.Event returnValue =
+				EventServiceUtil.getEvent(eventId);
 
-			return com.dnebinger.subsystem.events.model.EventSoap.toSoapModel(returnValue);
+			return com.dnebinger.subsystem.events.model.EventSoap.toSoapModel(
+				returnValue);
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		catch (Exception exception) {
+			_log.error(exception, exception);
 
-			throw new RemoteException(e.getMessage());
+			throw new RemoteException(exception.getMessage());
 		}
 	}
 
 	public static com.dnebinger.subsystem.events.model.EventSoap[] getEvents()
 		throws RemoteException {
+
 		try {
-			java.util.List<com.dnebinger.subsystem.events.model.Event> returnValue =
-				EventServiceUtil.getEvents();
+			java.util.List<com.dnebinger.subsystem.events.model.Event>
+				returnValue = EventServiceUtil.getEvents();
 
-			return com.dnebinger.subsystem.events.model.EventSoap.toSoapModels(returnValue);
+			return com.dnebinger.subsystem.events.model.EventSoap.toSoapModels(
+				returnValue);
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		catch (Exception exception) {
+			_log.error(exception, exception);
 
-			throw new RemoteException(e.getMessage());
+			throw new RemoteException(exception.getMessage());
 		}
 	}
 
-	public static com.dnebinger.subsystem.events.model.RelatedEventSoap[] getRelatedEvents(
-		long eventId) throws RemoteException {
+	public static com.dnebinger.subsystem.events.model.RelatedEventSoap[]
+			getRelatedEvents(long eventId)
+		throws RemoteException {
+
 		try {
-			java.util.List<com.dnebinger.subsystem.events.model.RelatedEvent> returnValue =
-				EventServiceUtil.getRelatedEvents(eventId);
+			java.util.List<com.dnebinger.subsystem.events.model.RelatedEvent>
+				returnValue = EventServiceUtil.getRelatedEvents(eventId);
 
-			return com.dnebinger.subsystem.events.model.RelatedEventSoap.toSoapModels(returnValue);
+			return com.dnebinger.subsystem.events.model.RelatedEventSoap.
+				toSoapModels(returnValue);
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		catch (Exception exception) {
+			_log.error(exception, exception);
 
-			throw new RemoteException(e.getMessage());
+			throw new RemoteException(exception.getMessage());
 		}
 	}
 
-	public static com.dnebinger.subsystem.events.model.EventAttendeeSoap[] getEventAttendees(
-		long eventId) throws RemoteException {
+	public static com.dnebinger.subsystem.events.model.EventAttendeeSoap[]
+			getEventAttendees(long eventId)
+		throws RemoteException {
+
 		try {
-			java.util.List<com.dnebinger.subsystem.events.model.EventAttendee> returnValue =
-				EventServiceUtil.getEventAttendees(eventId);
+			java.util.List<com.dnebinger.subsystem.events.model.EventAttendee>
+				returnValue = EventServiceUtil.getEventAttendees(eventId);
 
-			return com.dnebinger.subsystem.events.model.EventAttendeeSoap.toSoapModels(returnValue);
+			return com.dnebinger.subsystem.events.model.EventAttendeeSoap.
+				toSoapModels(returnValue);
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		catch (Exception exception) {
+			_log.error(exception, exception);
 
-			throw new RemoteException(e.getMessage());
+			throw new RemoteException(exception.getMessage());
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(EventServiceSoap.class);
+
 }

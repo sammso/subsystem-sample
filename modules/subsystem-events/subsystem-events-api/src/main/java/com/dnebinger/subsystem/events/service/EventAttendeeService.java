@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -25,6 +23,8 @@ import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 /**
  * Provides the remote service interface for EventAttendee. Methods of this
  * service are expected to have security checks based on the propagated JAAS
@@ -32,28 +32,35 @@ import com.liferay.portal.kernel.transaction.Transactional;
  *
  * @author Brian Wing Shun Chan
  * @see EventAttendeeServiceUtil
- * @see com.dnebinger.subsystem.events.service.base.EventAttendeeServiceBaseImpl
- * @see com.dnebinger.subsystem.events.service.impl.EventAttendeeServiceImpl
  * @generated
  */
 @AccessControlled
 @JSONWebService
-@OSGiBeanProperties(property =  {
-	"json.web.service.context.name=subsys", "json.web.service.context.path=EventAttendee"}, service = EventAttendeeService.class)
+@OSGiBeanProperties(
+	property = {
+		"json.web.service.context.name=subsys",
+		"json.web.service.context.path=EventAttendee"
+	},
+	service = EventAttendeeService.class
+)
 @ProviderType
-@Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
-	PortalException.class, SystemException.class})
+@Transactional(
+	isolation = Isolation.PORTAL,
+	rollbackFor = {PortalException.class, SystemException.class}
+)
 public interface EventAttendeeService extends BaseService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link EventAttendeeServiceUtil} to access the event attendee remote service. Add custom service methods to {@link com.dnebinger.subsystem.events.service.impl.EventAttendeeServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add custom service methods to <code>com.dnebinger.subsystem.events.service.impl.EventAttendeeServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the event attendee remote service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link EventAttendeeServiceUtil} if injection and service tracking are not available.
 	 */
 
 	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
-	public java.lang.String getOSGiServiceIdentifier();
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
+	public String getOSGiServiceIdentifier();
+
 }

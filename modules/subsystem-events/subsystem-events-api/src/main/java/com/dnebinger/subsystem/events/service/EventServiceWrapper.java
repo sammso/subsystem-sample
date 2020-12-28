@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,9 +23,9 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see EventService
  * @generated
  */
-@ProviderType
-public class EventServiceWrapper implements EventService,
-	ServiceWrapper<EventService> {
+public class EventServiceWrapper
+	implements EventService, ServiceWrapper<EventService> {
+
 	public EventServiceWrapper(EventService eventService) {
 		_eventService = eventService;
 	}
@@ -37,30 +35,34 @@ public class EventServiceWrapper implements EventService,
 		return _eventService.getEvent(eventId);
 	}
 
-	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
 	@Override
-	public java.lang.String getOSGiServiceIdentifier() {
-		return _eventService.getOSGiServiceIdentifier();
-	}
+	public java.util.List<com.dnebinger.subsystem.events.model.EventAttendee>
+		getEventAttendees(long eventId) {
 
-	@Override
-	public java.util.List<com.dnebinger.subsystem.events.model.EventAttendee> getEventAttendees(
-		long eventId) {
 		return _eventService.getEventAttendees(eventId);
 	}
 
 	@Override
-	public java.util.List<com.dnebinger.subsystem.events.model.Event> getEvents() {
+	public java.util.List<com.dnebinger.subsystem.events.model.Event>
+		getEvents() {
+
 		return _eventService.getEvents();
 	}
 
+	/**
+	 * Returns the OSGi service identifier.
+	 *
+	 * @return the OSGi service identifier
+	 */
 	@Override
-	public java.util.List<com.dnebinger.subsystem.events.model.RelatedEvent> getRelatedEvents(
-		long eventId) {
+	public String getOSGiServiceIdentifier() {
+		return _eventService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public java.util.List<com.dnebinger.subsystem.events.model.RelatedEvent>
+		getRelatedEvents(long eventId) {
+
 		return _eventService.getRelatedEvents(eventId);
 	}
 
@@ -75,4 +77,5 @@ public class EventServiceWrapper implements EventService,
 	}
 
 	private EventService _eventService;
+
 }

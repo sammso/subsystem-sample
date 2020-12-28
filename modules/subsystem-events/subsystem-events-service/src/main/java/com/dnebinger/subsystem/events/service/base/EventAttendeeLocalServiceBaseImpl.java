@@ -14,8 +14,6 @@
 
 package com.dnebinger.subsystem.events.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.dnebinger.subsystem.events.model.EventAttendee;
 import com.dnebinger.subsystem.events.service.EventAttendeeLocalService;
 import com.dnebinger.subsystem.events.service.persistence.EventAttendeePersistence;
@@ -41,8 +39,10 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalServiceImpl;
 import com.liferay.portal.kernel.service.PersistedModelLocalServiceRegistry;
+import com.liferay.portal.kernel.service.persistence.BasePersistence;
 import com.liferay.portal.kernel.service.persistence.ClassNamePersistence;
 import com.liferay.portal.kernel.service.persistence.UserPersistence;
+import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -62,21 +62,24 @@ import javax.sql.DataSource;
  *
  * @author Brian Wing Shun Chan
  * @see com.dnebinger.subsystem.events.service.impl.EventAttendeeLocalServiceImpl
- * @see com.dnebinger.subsystem.events.service.EventAttendeeLocalServiceUtil
  * @generated
  */
-@ProviderType
 public abstract class EventAttendeeLocalServiceBaseImpl
-	extends BaseLocalServiceImpl implements EventAttendeeLocalService,
-		IdentifiableOSGiService {
+	extends BaseLocalServiceImpl
+	implements EventAttendeeLocalService, IdentifiableOSGiService {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link com.dnebinger.subsystem.events.service.EventAttendeeLocalServiceUtil} to access the event attendee local service.
+	 * Never modify or reference this class directly. Use <code>EventAttendeeLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.dnebinger.subsystem.events.service.EventAttendeeLocalServiceUtil</code>.
 	 */
 
 	/**
 	 * Adds the event attendee to the database. Also notifies the appropriate model listeners.
+	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect EventAttendeeLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
 	 *
 	 * @param eventAttendee the event attendee
 	 * @return the event attendee that was added
@@ -96,12 +99,17 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 * @return the new event attendee
 	 */
 	@Override
+	@Transactional(enabled = false)
 	public EventAttendee createEventAttendee(long surrogateId) {
 		return eventAttendeePersistence.create(surrogateId);
 	}
 
 	/**
 	 * Deletes the event attendee with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect EventAttendeeLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
 	 *
 	 * @param surrogateId the primary key of the event attendee
 	 * @return the event attendee that was removed
@@ -111,11 +119,16 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	@Override
 	public EventAttendee deleteEventAttendee(long surrogateId)
 		throws PortalException {
+
 		return eventAttendeePersistence.remove(surrogateId);
 	}
 
 	/**
 	 * Deletes the event attendee from the database. Also notifies the appropriate model listeners.
+	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect EventAttendeeLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
 	 *
 	 * @param eventAttendee the event attendee
 	 * @return the event attendee that was removed
@@ -130,8 +143,8 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	public DynamicQuery dynamicQuery() {
 		Class<?> clazz = getClass();
 
-		return DynamicQueryFactoryUtil.forClass(EventAttendee.class,
-			clazz.getClassLoader());
+		return DynamicQueryFactoryUtil.forClass(
+			EventAttendee.class, clazz.getClassLoader());
 	}
 
 	/**
@@ -149,7 +162,7 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 * Performs a dynamic query on the database and returns a range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.dnebinger.subsystem.events.model.impl.EventAttendeeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.dnebinger.subsystem.events.model.impl.EventAttendeeModelImpl</code>.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -158,17 +171,18 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) {
-		return eventAttendeePersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end) {
+
+		return eventAttendeePersistence.findWithDynamicQuery(
+			dynamicQuery, start, end);
 	}
 
 	/**
 	 * Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.dnebinger.subsystem.events.model.impl.EventAttendeeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.dnebinger.subsystem.events.model.impl.EventAttendeeModelImpl</code>.
 	 * </p>
 	 *
 	 * @param dynamicQuery the dynamic query
@@ -178,10 +192,12 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 */
 	@Override
-	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end, OrderByComparator<T> orderByComparator) {
-		return eventAttendeePersistence.findWithDynamicQuery(dynamicQuery,
-			start, end, orderByComparator);
+	public <T> List<T> dynamicQuery(
+		DynamicQuery dynamicQuery, int start, int end,
+		OrderByComparator<T> orderByComparator) {
+
+		return eventAttendeePersistence.findWithDynamicQuery(
+			dynamicQuery, start, end, orderByComparator);
 	}
 
 	/**
@@ -203,10 +219,11 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 * @return the number of rows matching the dynamic query
 	 */
 	@Override
-	public long dynamicQueryCount(DynamicQuery dynamicQuery,
-		Projection projection) {
-		return eventAttendeePersistence.countWithDynamicQuery(dynamicQuery,
-			projection);
+	public long dynamicQueryCount(
+		DynamicQuery dynamicQuery, Projection projection) {
+
+		return eventAttendeePersistence.countWithDynamicQuery(
+			dynamicQuery, projection);
 	}
 
 	@Override
@@ -224,12 +241,14 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	@Override
 	public EventAttendee getEventAttendee(long surrogateId)
 		throws PortalException {
+
 		return eventAttendeePersistence.findByPrimaryKey(surrogateId);
 	}
 
 	@Override
 	public ActionableDynamicQuery getActionableDynamicQuery() {
-		ActionableDynamicQuery actionableDynamicQuery = new DefaultActionableDynamicQuery();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DefaultActionableDynamicQuery();
 
 		actionableDynamicQuery.setBaseLocalService(eventAttendeeLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
@@ -241,20 +260,26 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	}
 
 	@Override
-	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
-		IndexableActionableDynamicQuery indexableActionableDynamicQuery = new IndexableActionableDynamicQuery();
+	public IndexableActionableDynamicQuery
+		getIndexableActionableDynamicQuery() {
 
-		indexableActionableDynamicQuery.setBaseLocalService(eventAttendeeLocalService);
+		IndexableActionableDynamicQuery indexableActionableDynamicQuery =
+			new IndexableActionableDynamicQuery();
+
+		indexableActionableDynamicQuery.setBaseLocalService(
+			eventAttendeeLocalService);
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(EventAttendee.class);
 
-		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("surrogateId");
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
+			"surrogateId");
 
 		return indexableActionableDynamicQuery;
 	}
 
 	protected void initActionableDynamicQuery(
 		ActionableDynamicQuery actionableDynamicQuery) {
+
 		actionableDynamicQuery.setBaseLocalService(eventAttendeeLocalService);
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(EventAttendee.class);
@@ -265,15 +290,35 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	/**
 	 * @throws PortalException
 	 */
+	public PersistedModel createPersistedModel(Serializable primaryKeyObj)
+		throws PortalException {
+
+		return eventAttendeePersistence.create(
+			((Long)primaryKeyObj).longValue());
+	}
+
+	/**
+	 * @throws PortalException
+	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {
-		return eventAttendeeLocalService.deleteEventAttendee((EventAttendee)persistedModel);
+
+		return eventAttendeeLocalService.deleteEventAttendee(
+			(EventAttendee)persistedModel);
 	}
 
+	public BasePersistence<EventAttendee> getBasePersistence() {
+		return eventAttendeePersistence;
+	}
+
+	/**
+	 * @throws PortalException
+	 */
 	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
+
 		return eventAttendeePersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
@@ -281,7 +326,7 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 * Returns a range of all the event attendees.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.dnebinger.subsystem.events.model.impl.EventAttendeeModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>com.dnebinger.subsystem.events.model.impl.EventAttendeeModelImpl</code>.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of event attendees
@@ -306,6 +351,10 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	/**
 	 * Updates the event attendee in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	 *
+	 * <p>
+	 * <strong>Important:</strong> Inspect EventAttendeeLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
+	 * </p>
+	 *
 	 * @param eventAttendee the event attendee
 	 * @return the event attendee that was updated
 	 */
@@ -320,7 +369,9 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 *
 	 * @return the event local service
 	 */
-	public com.dnebinger.subsystem.events.service.EventLocalService getEventLocalService() {
+	public com.dnebinger.subsystem.events.service.EventLocalService
+		getEventLocalService() {
+
 		return eventLocalService;
 	}
 
@@ -330,7 +381,9 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 * @param eventLocalService the event local service
 	 */
 	public void setEventLocalService(
-		com.dnebinger.subsystem.events.service.EventLocalService eventLocalService) {
+		com.dnebinger.subsystem.events.service.EventLocalService
+			eventLocalService) {
+
 		this.eventLocalService = eventLocalService;
 	}
 
@@ -368,6 +421,7 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 */
 	public void setEventAttendeeLocalService(
 		EventAttendeeLocalService eventAttendeeLocalService) {
+
 		this.eventAttendeeLocalService = eventAttendeeLocalService;
 	}
 
@@ -387,6 +441,7 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 */
 	public void setEventAttendeePersistence(
 		EventAttendeePersistence eventAttendeePersistence) {
+
 		this.eventAttendeePersistence = eventAttendeePersistence;
 	}
 
@@ -395,7 +450,9 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 *
 	 * @return the related event local service
 	 */
-	public com.dnebinger.subsystem.events.service.RelatedEventLocalService getRelatedEventLocalService() {
+	public com.dnebinger.subsystem.events.service.RelatedEventLocalService
+		getRelatedEventLocalService() {
+
 		return relatedEventLocalService;
 	}
 
@@ -405,7 +462,9 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 * @param relatedEventLocalService the related event local service
 	 */
 	public void setRelatedEventLocalService(
-		com.dnebinger.subsystem.events.service.RelatedEventLocalService relatedEventLocalService) {
+		com.dnebinger.subsystem.events.service.RelatedEventLocalService
+			relatedEventLocalService) {
+
 		this.relatedEventLocalService = relatedEventLocalService;
 	}
 
@@ -425,6 +484,7 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 */
 	public void setRelatedEventPersistence(
 		RelatedEventPersistence relatedEventPersistence) {
+
 		this.relatedEventPersistence = relatedEventPersistence;
 	}
 
@@ -433,7 +493,9 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 *
 	 * @return the counter local service
 	 */
-	public com.liferay.counter.kernel.service.CounterLocalService getCounterLocalService() {
+	public com.liferay.counter.kernel.service.CounterLocalService
+		getCounterLocalService() {
+
 		return counterLocalService;
 	}
 
@@ -443,7 +505,9 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 * @param counterLocalService the counter local service
 	 */
 	public void setCounterLocalService(
-		com.liferay.counter.kernel.service.CounterLocalService counterLocalService) {
+		com.liferay.counter.kernel.service.CounterLocalService
+			counterLocalService) {
+
 		this.counterLocalService = counterLocalService;
 	}
 
@@ -452,7 +516,9 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 *
 	 * @return the class name local service
 	 */
-	public com.liferay.portal.kernel.service.ClassNameLocalService getClassNameLocalService() {
+	public com.liferay.portal.kernel.service.ClassNameLocalService
+		getClassNameLocalService() {
+
 		return classNameLocalService;
 	}
 
@@ -462,7 +528,9 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 * @param classNameLocalService the class name local service
 	 */
 	public void setClassNameLocalService(
-		com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService) {
+		com.liferay.portal.kernel.service.ClassNameLocalService
+			classNameLocalService) {
+
 		this.classNameLocalService = classNameLocalService;
 	}
 
@@ -482,6 +550,7 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 */
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
+
 		this.classNamePersistence = classNamePersistence;
 	}
 
@@ -490,7 +559,9 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 *
 	 * @return the resource local service
 	 */
-	public com.liferay.portal.kernel.service.ResourceLocalService getResourceLocalService() {
+	public com.liferay.portal.kernel.service.ResourceLocalService
+		getResourceLocalService() {
+
 		return resourceLocalService;
 	}
 
@@ -500,7 +571,9 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 * @param resourceLocalService the resource local service
 	 */
 	public void setResourceLocalService(
-		com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService) {
+		com.liferay.portal.kernel.service.ResourceLocalService
+			resourceLocalService) {
+
 		this.resourceLocalService = resourceLocalService;
 	}
 
@@ -509,7 +582,9 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 *
 	 * @return the user local service
 	 */
-	public com.liferay.portal.kernel.service.UserLocalService getUserLocalService() {
+	public com.liferay.portal.kernel.service.UserLocalService
+		getUserLocalService() {
+
 		return userLocalService;
 	}
 
@@ -520,6 +595,7 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	 */
 	public void setUserLocalService(
 		com.liferay.portal.kernel.service.UserLocalService userLocalService) {
+
 		this.userLocalService = userLocalService;
 	}
 
@@ -542,7 +618,8 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
-		persistedModelLocalServiceRegistry.register("com.dnebinger.subsystem.events.model.EventAttendee",
+		persistedModelLocalServiceRegistry.register(
+			"com.dnebinger.subsystem.events.model.EventAttendee",
 			eventAttendeeLocalService);
 	}
 
@@ -583,40 +660,72 @@ public abstract class EventAttendeeLocalServiceBaseImpl
 			sql = db.buildSQL(sql);
 			sql = PortalUtil.transformSQL(sql);
 
-			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(dataSource,
-					sql);
+			SqlUpdate sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource, sql);
 
 			sqlUpdate.update();
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+		catch (Exception exception) {
+			throw new SystemException(exception);
 		}
 	}
 
-	@BeanReference(type = com.dnebinger.subsystem.events.service.EventLocalService.class)
-	protected com.dnebinger.subsystem.events.service.EventLocalService eventLocalService;
+	@BeanReference(
+		type = com.dnebinger.subsystem.events.service.EventLocalService.class
+	)
+	protected com.dnebinger.subsystem.events.service.EventLocalService
+		eventLocalService;
+
 	@BeanReference(type = EventPersistence.class)
 	protected EventPersistence eventPersistence;
+
 	@BeanReference(type = EventAttendeeLocalService.class)
 	protected EventAttendeeLocalService eventAttendeeLocalService;
+
 	@BeanReference(type = EventAttendeePersistence.class)
 	protected EventAttendeePersistence eventAttendeePersistence;
-	@BeanReference(type = com.dnebinger.subsystem.events.service.RelatedEventLocalService.class)
-	protected com.dnebinger.subsystem.events.service.RelatedEventLocalService relatedEventLocalService;
+
+	@BeanReference(
+		type = com.dnebinger.subsystem.events.service.RelatedEventLocalService.class
+	)
+	protected com.dnebinger.subsystem.events.service.RelatedEventLocalService
+		relatedEventLocalService;
+
 	@BeanReference(type = RelatedEventPersistence.class)
 	protected RelatedEventPersistence relatedEventPersistence;
-	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
-	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)
-	protected com.liferay.portal.kernel.service.ClassNameLocalService classNameLocalService;
+
+	@ServiceReference(
+		type = com.liferay.counter.kernel.service.CounterLocalService.class
+	)
+	protected com.liferay.counter.kernel.service.CounterLocalService
+		counterLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ClassNameLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ClassNameLocalService
+		classNameLocalService;
+
 	@ServiceReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
-	@ServiceReference(type = com.liferay.portal.kernel.service.ResourceLocalService.class)
-	protected com.liferay.portal.kernel.service.ResourceLocalService resourceLocalService;
-	@ServiceReference(type = com.liferay.portal.kernel.service.UserLocalService.class)
-	protected com.liferay.portal.kernel.service.UserLocalService userLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.ResourceLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.ResourceLocalService
+		resourceLocalService;
+
+	@ServiceReference(
+		type = com.liferay.portal.kernel.service.UserLocalService.class
+	)
+	protected com.liferay.portal.kernel.service.UserLocalService
+		userLocalService;
+
 	@ServiceReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
-	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
+	protected PersistedModelLocalServiceRegistry
+		persistedModelLocalServiceRegistry;
+
 }
